@@ -1,0 +1,63 @@
+package engine
+
+import (
+	"simple-games.com/asteroids/physics"
+	"simple-games.com/asteroids/utils"
+)
+
+type World struct {
+	Collisionables []physics.ICollisionable
+}
+
+func (world *World) AddCollisinable(collisionable physics.ICollisionable) {
+	world.Collisionables = append(world.Collisionables, collisionable)
+}
+
+func (world *World) Update() {
+	world.TestCollisions()
+	world.RemoveDead()
+}
+
+func (world *World) TestCollisions() {
+	for i := 0; i < len(world.Collisionables); i++ {
+		leftCollisionable := world.Collisionables[i]
+
+		mayTestCollisions := leftCollisionable.IsAlive() && leftCollisionable.CanCollide()
+
+		if !mayTestCollisions {
+			continue
+		}
+
+		for j := i + 1; j < len(world.Collisionables); j++ {
+			rightCollisinable := world.Collisionables[j]
+			mustTestCollision := rightCollisinable.IsAlive() &&
+				rightCollisinable.CanCollide() &&
+				leftCollisionable.CanCollideWith(rightCollisinable.GetCollisionMask())
+
+			if mustTestCollision {
+				collision := physics.Collision{
+					LeftCollisionable:  leftCollisionable,
+					RightCollisionable: rightCollisinable,
+				}
+
+				collision.ReportIfHapenning()
+			}
+		}
+	}
+}
+
+func (world *World) RemoveDead() {
+	utils.RemoveDead(&world.Collisionables)
+}
+
+var world *World = nil
+
+func GetWorld() *World {
+	needToInitWorld := world == nil
+
+	if needToInitWorld {
+		world = &World{}
+	}
+
+	return world
+}

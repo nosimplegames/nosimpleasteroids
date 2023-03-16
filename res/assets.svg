@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="assets.svg"
+   inkscape:export-filename="C:\dev\simple-asteroids\assets.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="42.956737"
+     inkscape:cy="249.96225"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:lockguides="true" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:0.472001;stroke-linejoin:bevel;paint-order:fill markers stroke"
+       id="rect846"
+       width="220.51601"
+       height="195.85559"
+       x="-23.231047"
+       y="35.382671"
+       ry="13.403964" />
+    <path
+       sodipodi:type="star"
+       style="fill:none;stroke:#ffffff;stroke-width:50.07410176;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke"
+       id="path933"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="201.27008"
+       sodipodi:cy="324.19342"
+       sodipodi:r1="155.92888"
+       sodipodi:r2="77.964439"
+       sodipodi:arg1="0.78539816"
+       sodipodi:arg2="1.8325957"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="M 311.52845,434.45179 50.65435,364.55078 241.62744,173.57769 Z"
+       transform="matrix(0.00385416,0.01261772,-0.01438393,0.0033809,23.75654,43.721779)"
+       inkscape:transform-center-x="-0.58049836"
+       inkscape:export-filename="C:\dev\simple-asteroids\assets\player.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:0.76376;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect869"
+       width="1.8820738"
+       height="0.55915713"
+       x="23.993448"
+       y="47.054192"
+       ry="0.27957857"
+       inkscape:export-filename="C:\dev\simple-asteroids\assets\bullet.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.81300004;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -9.9523894,56.057014 -0.9329036,2.68827 0.795763,3.425469 5.0959278,1.070818 4.65133198,-1.292034 2.50527132,-3.587045 -1.62932095,-2.732109 -1.18603937,-2.673427 -2.98614978,1.031066 -2.1819972,-2.633193 -1.9919216,1.142269 -2.2976412,1.028354 z"
+       id="path857"
+       inkscape:export-filename="C:\dev\simple-asteroids\assets\big-asteroid.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       sodipodi:nodetypes="ccccccccccccc" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.865653;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m -4.0010313,81.011081 -0.600193,1.778863 0.511962,2.266679 3.27853199,0.708573 2.99249401,-0.854956 1.611798,-2.373597 -1.742282,-1.482727 -0.06903,-2.094185 -0.800042,-1.018484 -2.524954,-0.04165 -1.281527,0.755855 z"
+       id="path2233"
+       inkscape:export-filename="C:\dev\simple-asteroids\assets\normal-asteroid.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       sodipodi:nodetypes="ccccccccccccc" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:0.534925;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 15.920784,69.734647 -0.902543,-0.777119 -1.450722,-0.288225 -1.187912,1.624564 -0.203026,1.860276 1.013314,1.482821 1.28042,-0.585294 1.245185,0.48841 0.786088,-0.183902 0.619074,-1.377846 -0.141756,-0.894613 z"
+       id="path3267"
+       inkscape:export-filename="C:\dev\simple-asteroids\assets\small-asteroid.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"
+       sodipodi:nodetypes="ccccccccccccc" />
+  </g>
+</svg>

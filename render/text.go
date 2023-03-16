@@ -1,0 +1,40 @@
+package render
+
+import (
+	"image/color"
+
+	"github.com/hajimehoshi/ebiten"
+	ebitenText "github.com/hajimehoshi/ebiten/text"
+	"golang.org/x/image/font"
+	"simple-games.com/asteroids/math"
+)
+
+type Text struct {
+	Text     string
+	FontFace font.Face
+	Target   *ebiten.Image
+	Position math.Vector
+}
+
+func (text Text) Render() {
+	x, y := text.GetRenderingPosition()
+
+	ebitenText.Draw(
+		text.Target,
+		text.Text,
+		text.FontFace,
+		x,
+		y,
+		color.White,
+	)
+}
+
+func (text Text) GetRenderingPosition() (int, int) {
+	renderingSize := ebitenText.BoundString(text.FontFace, text.Text)
+
+	drawingPosition := text.Position
+	drawingPosition.X -= float64(renderingSize.Max.X) * 0.5
+	drawingPosition.Y += float64(-renderingSize.Min.Y)
+
+	return int(drawingPosition.X), int(drawingPosition.Y)
+}

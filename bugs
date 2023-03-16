@@ -1,0 +1,6 @@
++ No fixed
+- Fixed
+
+- Bullets are rotated incorrectly, they're rotation is correct
+  related to spaceship rotation however they're always looking to the right
+  __SOLUTION__: I was not setting Transformable rotation but Inert, so I removed Inert:Rotation and use Transformable's one instead
