@@ -18,10 +18,10 @@ func (explosion Explosion) IsAlive() bool {
 	return explosion.Animation.IsAlive()
 }
 
-func (explosion *Explosion) Draw(target render.RenderTarget) {
+func (explosion *Explosion) Draw(target render.RenderTarget, transform math.Transform) {
 	sprite := explosion.Animation.GetCurrentSprite()
 	sprite.Target = target
-	sprite.Transform = explosion.GetTransform()
+	sprite.Transform = transform
 
 	sprite.Render()
 }

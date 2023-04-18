@@ -22,6 +22,17 @@ func (timer *Timer) AddTimeout(timeout ITimeout) {
 	timer.Timeouts = append(timer.Timeouts, timeout)
 }
 
+func (timer *Timer) RemoveTimeout(timeoutId string) {
+	for _, timeout := range timer.Timeouts {
+		isTimeoutToRemove := timeout.GetId() == timeoutId
+
+		if isTimeoutToRemove {
+			timeout.Die()
+			return
+		}
+	}
+}
+
 var timer *Timer = nil
 
 func GetTimer() *Timer {

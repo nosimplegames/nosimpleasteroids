@@ -1,15 +1,15 @@
-package ui
+package progressbar
 
 import (
 	"simple-games.com/asteroids/render"
 )
 
-type ProgressBarFactory struct {
+type Factory struct {
 	BarTexture      render.Texture
 	ProgressTexture render.Texture
 }
 
-func (factory ProgressBarFactory) Create() *ProgressBar {
+func (factory Factory) Create() *ProgressBar {
 	progressBar := &ProgressBar{
 		BarTexture:      factory.BarTexture,
 		ProgressTexture: factory.ProgressTexture,

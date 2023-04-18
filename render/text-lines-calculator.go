@@ -41,6 +41,12 @@ func (calculator TextLinesCalculator) Calculate() ([]string, math.Vector) {
 		}
 	}
 
+	needToAppendLastLine := currentLine != ""
+
+	if needToAppendLastLine {
+		lines = append(lines, currentLine)
+	}
+
 	size := math.Vector{
 		X: calculator.LineWidth,
 		Y: float64(len(lines) * int(calculator.LineHeight)),

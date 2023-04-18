@@ -26,10 +26,10 @@ type Spaceship struct {
 	RespawningAnimation *animations.AnimationList
 }
 
-func (spaceship Spaceship) Draw(screen *ebiten.Image) {
+func (spaceship Spaceship) Draw(screen *ebiten.Image, transform math.Transform) {
 	render.Sprite{
 		Target:    screen,
-		Transform: spaceship.GetTransform(),
+		Transform: transform,
 		Texture:   GetAssets().SpaceshipTexture,
 		ColorM:    spaceship.GetColorM(),
 	}.Render()

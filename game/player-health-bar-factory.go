@@ -2,7 +2,7 @@ package game
 
 import (
 	"simple-games.com/asteroids/math"
-	"simple-games.com/asteroids/ui"
+	"simple-games.com/asteroids/ui/progressbar"
 )
 
 type PlayerHealthBarFactory struct {
@@ -11,7 +11,7 @@ type PlayerHealthBarFactory struct {
 func (factory PlayerHealthBarFactory) Create() *PlayerHealthBar {
 	assets := GetAssets()
 	healthBar := &PlayerHealthBar{
-		ProgressBar: *ui.ProgressBarFactory{
+		ProgressBar: *progressbar.Factory{
 			ProgressTexture: assets.ProgressTexture,
 			BarTexture:      assets.BarTexture,
 		}.Create(),

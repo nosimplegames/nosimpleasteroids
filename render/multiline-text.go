@@ -6,16 +6,16 @@ import (
 )
 
 type MultilineText struct {
-	Lines    []string
-	FontFace font.Face
-	Target   RenderTarget
-	Position math.Vector
-	Size     math.Vector
+	Lines         []string
+	FontFace      font.Face
+	Target        RenderTarget
+	Position      math.Vector
+	TextAlignment TextAlignment
 }
 
 func (text MultilineText) Render() {
-	renderingPosition := text.GetRenderingPosition()
-	lineHeight := text.Size.Y / float64(len(text.Lines))
+	lineHeight := float64(text.FontFace.Metrics().Height.Round())
+	renderingPosition := text.GetRenderingPosition(lineHeight)
 
 	for lineIndex, line := range text.Lines {
 		position := math.Vector{
@@ -32,9 +32,9 @@ func (text MultilineText) Render() {
 	}
 }
 
-func (text MultilineText) GetRenderingPosition() math.Vector {
+func (text MultilineText) GetRenderingPosition(lineHeight float64) math.Vector {
 	return math.Vector{
 		X: text.Position.X,
-		Y: text.Position.Y - text.Size.Y*0.5,
+		Y: text.Position.Y - lineHeight,
 	}
 }

@@ -8,11 +8,13 @@ import (
 )
 
 type PlayerFactory struct {
-	IsPlayerRespawning bool
+	IsPlayerRespawning   bool
+	IsControllerDisabled bool
 }
 
 func (factory PlayerFactory) Create() *Player {
 	player := &Player{}
+	player.IsControllerEnabled = !factory.IsControllerDisabled
 	player.Propulsor = Engine{
 		MinSpeed:      0.3,
 		Acceleration:  0.05,
@@ -46,9 +48,10 @@ func (factory PlayerFactory) Create() *Player {
 		X: 8,
 		Y: 8,
 	}
+	player.Rotation = math.DegreesToRads(-90)
 
 	player.HealthBar = PlayerHealthBarFactory{}.Create()
-	player.AddChild(player.HealthBar)
+	// player.AddChild(player.HealthBar)
 
 	player.AddEventListener(events.EventListener{
 		EventType: LifePointsChanged,

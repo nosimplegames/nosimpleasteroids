@@ -1,7 +1,6 @@
 package render
 
 import (
-	"github.com/hajimehoshi/ebiten"
 	"simple-games.com/asteroids/math"
 )
 
@@ -10,11 +9,9 @@ type Slice9 struct {
 }
 
 func (slice9 Slice9) Compose(targetSize math.Vector) Texture {
-	texture, _ := ebiten.NewImage(
-		int(targetSize.X),
-		int(targetSize.Y),
-		ebiten.FilterDefault,
-	)
+	texture := TextureFactory{
+		TargetSize: targetSize,
+	}.Create()
 
 	areas := slice9.GetTargetAreas(targetSize)
 

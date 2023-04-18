@@ -74,11 +74,11 @@ func (asteroid *Asteroid) SetSize(size AsteroidSize) {
 	asteroid.Origin = asteroid.SizeInPixels.By(0.5)
 }
 
-func (asteroid Asteroid) Draw(screen *ebiten.Image) {
+func (asteroid Asteroid) Draw(target render.RenderTarget, transform math.Transform) {
 	render.Sprite{
 		Texture:   asteroid.Texture,
-		Transform: asteroid.GetTransform(),
-		Target:    screen,
+		Transform: transform,
+		Target:    target,
 	}.Render()
 }
 
@@ -111,4 +111,8 @@ func (asteroid *Asteroid) OnCollision(collisionMask string) {
 
 func (asteroid Asteroid) IsAlive() bool {
 	return asteroid.Particle.IsAlive() && asteroid.LifePoints > 0
+}
+
+func (asteroid *Asteroid) Die() {
+	asteroid.Particle.Die()
 }

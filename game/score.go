@@ -4,7 +4,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/hajimehoshi/ebiten"
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
@@ -20,7 +19,7 @@ func (score *Score) Increase(amount int) {
 	score.Points += amount
 }
 
-func (score Score) Draw(target *ebiten.Image) {
+func (score Score) Draw(target render.RenderTarget, transform math.Transform) {
 	render.Text{
 		Text:   score.GetScoreString(),
 		Target: target,

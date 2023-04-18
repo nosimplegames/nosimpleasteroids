@@ -1,7 +1,6 @@
 package game
 
 import (
-	"github.com/hajimehoshi/ebiten"
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/particles"
@@ -22,11 +21,11 @@ func (bullet *Bullet) Update() {
 	bullet.Live()
 }
 
-func (bullet Bullet) Draw(screen *ebiten.Image) {
+func (bullet Bullet) Draw(target render.RenderTarget, transform math.Transform) {
 	render.Sprite{
 		Texture:   GetAssets().BulletTexture,
-		Transform: bullet.GetTransform(),
-		Target:    screen,
+		Transform: transform,
+		Target:    target,
 	}.Render()
 }
 
@@ -58,4 +57,8 @@ func (bullet *Bullet) OnCollision(collisionMask string) {
 
 func (bullet Bullet) IsAlive() bool {
 	return bullet.Particle.IsAlive()
+}
+
+func (bullet *Bullet) Die() {
+	bullet.Particle.Die()
 }

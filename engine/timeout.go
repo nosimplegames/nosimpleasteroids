@@ -1,6 +1,8 @@
 package engine
 
-import "simple-games.com/asteroids/utils"
+import (
+	"simple-games.com/asteroids/utils"
+)
 
 type TimeoutCallback func()
 
@@ -9,6 +11,8 @@ type Timeout struct {
 	CurrentTime float64
 	Callback    TimeoutCallback
 	IsLoop      bool
+	Id          string
+	ForcedDeath bool
 }
 
 func (timeout *Timeout) Update() {
@@ -16,7 +20,11 @@ func (timeout *Timeout) Update() {
 }
 
 func (timeout Timeout) IsAlive() bool {
-	return timeout.CurrentTime < timeout.Time || timeout.IsLoop
+	return !timeout.ForcedDeath && (timeout.CurrentTime < timeout.Time || timeout.IsLoop)
+}
+
+func (timeout *Timeout) Die() {
+	timeout.ForcedDeath = true
 }
 
 func (timeout *Timeout) Exec() {
@@ -34,4 +42,8 @@ func (timeout *Timeout) Exec() {
 
 func (timeout *Timeout) Reset() {
 	timeout.CurrentTime = 0
+}
+
+func (timeout Timeout) GetId() string {
+	return timeout.Id
 }

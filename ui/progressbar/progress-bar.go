@@ -1,4 +1,4 @@
-package ui
+package progressbar
 
 import (
 	"image"
@@ -20,11 +20,11 @@ type ProgressBar struct {
 	Value    float64
 }
 
-func (bar ProgressBar) Draw(target render.RenderTarget) {
+func (bar ProgressBar) Draw(target render.RenderTarget, transform math.Transform) {
 	render.Sprite{
 		Texture:   bar.BarTexture,
 		Target:    target,
-		Transform: bar.GetTransform(),
+		Transform: transform,
 	}.Render()
 
 	render.Sprite{

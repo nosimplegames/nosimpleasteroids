@@ -11,10 +11,15 @@ type Player struct {
 	engine.Entity
 	Spaceship
 
-	HealthBar *PlayerHealthBar
+	HealthBar           *PlayerHealthBar
+	IsControllerEnabled bool
 }
 
 func (player *Player) HandleInput() {
+	if !player.IsControllerEnabled {
+		return
+	}
+
 	if ebiten.IsKeyPressed(ebiten.KeyW) {
 		player.Propulsor.Accelerate()
 	} else {
@@ -41,6 +46,10 @@ func (player *Player) HandleInput() {
 }
 
 func (player *Player) Update() {
+	if !player.IsControllerEnabled {
+		return
+	}
+
 	player.Rotate(-player.LeftRotator.CurrentSpeed)
 	player.Rotate(player.RightRotator.CurrentSpeed)
 
@@ -55,6 +64,6 @@ func (player Player) IsAlive() bool {
 	return player.Spaceship.IsAlive()
 }
 
-func (player Player) Draw(target render.RenderTarget) {
-	player.Spaceship.Draw(target)
+func (player Player) Draw(target render.RenderTarget, transform math.Transform) {
+	player.Spaceship.Draw(target, transform)
 }

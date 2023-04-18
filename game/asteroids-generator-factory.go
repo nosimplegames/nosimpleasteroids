@@ -8,6 +8,8 @@ import (
 type AsteroidsGeneratorFactory struct {
 }
 
+const asteroidsGeneratorTimeoutId = "asteroids-generator-timeout"
+
 func (factory AsteroidsGeneratorFactory) Create() *AsteroidsGenerator {
 	generator := &AsteroidsGenerator{}
 
@@ -50,6 +52,7 @@ func (factory AsteroidsGeneratorFactory) Create() *AsteroidsGenerator {
 		Time:     2,
 		Callback: generator.GenerateAsteroid,
 		IsLoop:   true,
+		Id:       asteroidsGeneratorTimeoutId,
 	})
 
 	return generator
@@ -57,4 +60,8 @@ func (factory AsteroidsGeneratorFactory) Create() *AsteroidsGenerator {
 
 func InitAsteroidsGenerator() {
 	AsteroidsGeneratorFactory{}.Create()
+}
+
+func StopAsteroidsGenerator() {
+	engine.GetTimer().RemoveTimeout(asteroidsGeneratorTimeoutId)
 }

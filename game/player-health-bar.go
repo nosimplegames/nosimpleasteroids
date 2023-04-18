@@ -1,7 +1,7 @@
 package game
 
-import "simple-games.com/asteroids/ui"
+import "simple-games.com/asteroids/ui/progressbar"
 
 type PlayerHealthBar struct {
-	ui.ProgressBar
+	progressbar.ProgressBar
 }

@@ -16,10 +16,12 @@ type Assets struct {
 	SmallAsteroidTexture  render.Texture
 	SmallExplosionTexture render.Texture
 	BigExplosionTexture   render.Texture
+	EnergyBlastTexture    render.Texture
 
-	BarTexture       render.Texture
-	ProgressTexture  render.Texture
-	TextDialogSlice9 render.Slice9
+	BarTexture        render.Texture
+	ProgressTexture   render.Texture
+	NextDialogTexture render.Texture
+	TextDialogSlice9  render.Slice9
 
 	UIFontFace font.Face
 
@@ -42,9 +44,11 @@ func GetAssets() *Assets {
 			SmallAsteroidTexture:  assets.LoadTexture("./res/small-asteroid.png"),
 			SmallExplosionTexture: assets.LoadTexture("./res/small-explosion.png"),
 			BigExplosionTexture:   assets.LoadTexture("./res/big-explosion.png"),
+			EnergyBlastTexture:    assets.LoadTexture("./res/energy-blast2.png"),
 
-			BarTexture:      assets.LoadTexture("./res/bar.png"),
-			ProgressTexture: assets.LoadTexture("./res/progress.png"),
+			BarTexture:        assets.LoadTexture("./res/bar.png"),
+			ProgressTexture:   assets.LoadTexture("./res/progress.png"),
+			NextDialogTexture: assets.LoadTexture("./res/next-dialog.png"),
 
 			TextDialogSlice9: render.Slice9Factory{
 				Texture: assets.LoadTexture("./res/text-dialog.png"),
