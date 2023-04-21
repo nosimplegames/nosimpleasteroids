@@ -4,7 +4,6 @@ import (
 	"simple-games.com/asteroids/animations"
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/events"
-	"simple-games.com/asteroids/math"
 )
 
 type PlayerFactory struct {
@@ -14,41 +13,8 @@ type PlayerFactory struct {
 
 func (factory PlayerFactory) Create() *Player {
 	player := &Player{}
+	player.Spaceship = *SpaceshipFactory{}.Create()
 	player.IsControllerEnabled = !factory.IsControllerDisabled
-	player.Propulsor = Engine{
-		MinSpeed:      0.3,
-		Acceleration:  0.05,
-		MaxSpeed:      4,
-		Deaceleration: 0.025,
-	}
-	player.RightRotator = Engine{
-		MinSpeed:      0.0,
-		Acceleration:  0.003,
-		MaxSpeed:      0.05,
-		Deaceleration: 0.002,
-	}
-	player.LeftRotator = Engine{
-		MinSpeed:      0.0,
-		Acceleration:  0.003,
-		MaxSpeed:      0.05,
-		Deaceleration: 0.002,
-	}
-	player.Turret = &Turret{
-		Weapon: Weapon{
-			TimeBetweenShoots: 0.1,
-		},
-	}
-	player.LifePoints = 3
-
-	player.Position = math.Vector{
-		X: 400,
-		Y: 400,
-	}
-	player.Origin = math.Vector{
-		X: 8,
-		Y: 8,
-	}
-	player.Rotation = math.DegreesToRads(-90)
 
 	player.HealthBar = PlayerHealthBarFactory{}.Create()
 	// player.AddChild(player.HealthBar)

@@ -46,17 +46,11 @@ func (entities *Entities) RemoveDead() {
 
 func (entities Entities) Draw(target render.RenderTarget) {
 	for _, entity := range entities.Entities {
-		entities.DrawEntity(entity, target, math.Transform{})
-	}
-}
-
-func (entities Entities) DrawEntity(entity IEntity, target render.RenderTarget, parentTransform math.Transform) {
-	transform := entity.GetTransform()
-	transform.Concat(parentTransform)
-	entity.Draw(target, transform)
-
-	for _, child := range entity.GetChildren() {
-		entities.DrawEntity(child, target, transform)
+		EntityDrawer{
+			Entity:    entity,
+			Transform: math.Transform{},
+			Target:    target,
+		}.Draw()
 	}
 }
 

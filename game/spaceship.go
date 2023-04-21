@@ -3,6 +3,7 @@ package game
 import (
 	"github.com/hajimehoshi/ebiten"
 	"simple-games.com/asteroids/animations"
+	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/events"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
@@ -13,12 +14,14 @@ type OnDestroyCallback func()
 type Spaceship struct {
 	math.Transformable
 	events.EventTarget
+	engine.Entity
 
 	Propulsor    Engine
 	RightRotator Engine
 	LeftRotator  Engine
 
-	Turret IWeapon
+	Turret          IWeapon
+	ShieldGenerator ShieldGenerator
 
 	LifePoints int
 	OnDestroy  OnDestroyCallback
@@ -60,7 +63,7 @@ func (spaceship Spaceship) GetSize() math.Vector {
 }
 
 func (spaceship Spaceship) CanCollide() bool {
-	return !spaceship.IsRespawning()
+	return !spaceship.IsRespawning() && !spaceship.ShieldGenerator.IsShieldActivated
 }
 
 func (spaceship Spaceship) CanCollideWith(collisionMask string) bool {
@@ -83,4 +86,9 @@ func (spaceship *Spaceship) OnCollision(collisionMask string) {
 	if gotDestroyed {
 		spaceship.OnDestroy()
 	}
+}
+
+func (spaceship *Spaceship) ActivateShield() {
+	shield := spaceship.ShieldGenerator.ActivateShield()
+	spaceship.AddChild(shield)
 }

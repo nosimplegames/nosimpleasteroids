@@ -9,6 +9,7 @@ type SpriteAnimationFactory struct {
 	Texture       render.Texture
 	FrameDuration float64
 	FrameSize     math.Vector
+	FrameCount    int
 }
 
 func (factory SpriteAnimationFactory) Create() SpriteAnimation {
@@ -33,8 +34,15 @@ func (factory SpriteAnimationFactory) GetFrames() []math.Box {
 	rows := textureHeight / int(factory.FrameSize.Y)
 	halfFrameSize := factory.FrameSize.By(0.5)
 
+	framesToExtract := factory.GetNumberOfFramesToExtract()
+
 	for row := 0; row < rows; row++ {
 		for column := 0; column < columns; column++ {
+			mayExtractFrame := framesToExtract == -1 || framesToExtract > 0
+			if !mayExtractFrame {
+				return frames
+			}
+
 			frame := math.Box{
 				Size: factory.FrameSize,
 				Position: math.Vector{
@@ -43,8 +51,19 @@ func (factory SpriteAnimationFactory) GetFrames() []math.Box {
 				},
 			}
 			frames = append(frames, frame)
+			framesToExtract--
 		}
 	}
 
 	return frames
+}
+
+func (factory SpriteAnimationFactory) GetNumberOfFramesToExtract() int {
+	hasFrameLimit := factory.FrameCount >= 1
+
+	if !hasFrameLimit {
+		return -1
+	}
+
+	return factory.FrameCount
 }

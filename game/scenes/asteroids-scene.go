@@ -38,7 +38,7 @@ func (scene *AsteroidsScene) onInitialConversationEnds() {
 	game.InitAsteroidsGenerator()
 
 	engine.GetTimer().AddTimeout(&engine.Timeout{
-		Time: 5,
+		Time: 10,
 		Callback: func() {
 			game.StopAsteroidsGenerator()
 			scene.startConversationAfterAsteroids()
@@ -87,6 +87,7 @@ func (scene *AsteroidsScene) startConversation(conversation string, callback fun
 func (scene *AsteroidsScene) createEnergyBlast() {
 	blast := game.EnergyBlastFactory{}.Create()
 	scene.AddChild(blast)
+	scene.Player.ActivateShield()
 }
 
 // func (scene *AsteroidsScene) createScore() {

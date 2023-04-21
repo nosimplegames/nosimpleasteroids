@@ -38,7 +38,7 @@ func (list *AnimationList) ChangeCurrentAnimationIfRequired() {
 		needToStopAnimation := list.CurrentAnimationIndex >= len(list.Animations)
 
 		if needToStopAnimation {
-			list.State = AnimationStopped
+			list.Stop()
 		} else {
 			list.CurrentAnimation = list.Animations[list.CurrentAnimationIndex]
 		}

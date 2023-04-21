@@ -2,13 +2,12 @@ package game
 
 import (
 	"github.com/hajimehoshi/ebiten"
-	"simple-games.com/asteroids/engine"
+	"github.com/hajimehoshi/ebiten/inpututil"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
 )
 
 type Player struct {
-	engine.Entity
 	Spaceship
 
 	HealthBar           *PlayerHealthBar
@@ -40,6 +39,10 @@ func (player *Player) HandleInput() {
 
 	if ebiten.IsKeyPressed(ebiten.KeyJ) {
 		player.Turret.Shoot(player.Position, player.Rotation)
+	}
+
+	if inpututil.IsKeyJustReleased(ebiten.KeySpace) {
+		player.ActivateShield()
 	}
 
 	player.Turret.PrepareForNextShoot()

@@ -14,6 +14,7 @@ type SpriteAnimation struct {
 	Frames            []math.Box
 	FrameDuration     float64
 	CurrentFrameTime  float64
+	Foo               int
 }
 
 func (animation *SpriteAnimation) Update() {
@@ -26,11 +27,12 @@ func (animation *SpriteAnimation) Update() {
 
 	if needToMoveToNextFrame {
 		animation.CurrentFrameIndex++
+		animation.CurrentFrameTime = 0
 
 		needToStop := animation.CurrentFrameIndex >= len(animation.Frames)
 
 		if needToStop {
-			animation.State = AnimationStopped
+			animation.Stop()
 		}
 	}
 }

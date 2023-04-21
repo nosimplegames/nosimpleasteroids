@@ -17,6 +17,7 @@ type Assets struct {
 	SmallExplosionTexture render.Texture
 	BigExplosionTexture   render.Texture
 	EnergyBlastTexture    render.Texture
+	ShieldTexture         render.Texture
 
 	BarTexture        render.Texture
 	ProgressTexture   render.Texture
@@ -27,6 +28,7 @@ type Assets struct {
 
 	SmallExplosionAnimation animations.SpriteAnimation
 	BigExplosionAnimation   animations.SpriteAnimation
+	ShieldAnimation         animations.SpriteAnimation
 	RespawningAnimation     animations.AnimationList
 }
 
@@ -44,7 +46,8 @@ func GetAssets() *Assets {
 			SmallAsteroidTexture:  assets.LoadTexture("./res/small-asteroid.png"),
 			SmallExplosionTexture: assets.LoadTexture("./res/small-explosion.png"),
 			BigExplosionTexture:   assets.LoadTexture("./res/big-explosion.png"),
-			EnergyBlastTexture:    assets.LoadTexture("./res/energy-blast2.png"),
+			EnergyBlastTexture:    assets.LoadTexture("./res/energy-blast.png"),
+			ShieldTexture:         assets.LoadTexture("./res/simple-energy-shield.png"),
 
 			BarTexture:        assets.LoadTexture("./res/bar.png"),
 			ProgressTexture:   assets.LoadTexture("./res/progress.png"),
@@ -82,6 +85,15 @@ func GetAssets() *Assets {
 				X: 32,
 				Y: 32,
 			},
+		}.Create()
+		globalAssets.ShieldAnimation = animations.SpriteAnimationFactory{
+			Texture:       globalAssets.ShieldTexture,
+			FrameDuration: 1.0 / 14.0,
+			FrameSize: math.Vector{
+				X: 32,
+				Y: 32,
+			},
+			FrameCount: 7,
 		}.Create()
 	}
 

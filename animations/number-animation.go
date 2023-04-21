@@ -14,7 +14,7 @@ func (animation *NumberAnimation) Update() {
 
 	if animation.HasFinished() {
 		animation.CurrentValue = animation.TargetValue
-		animation.State = AnimationStopped
+		animation.Stop()
 	}
 }
 
