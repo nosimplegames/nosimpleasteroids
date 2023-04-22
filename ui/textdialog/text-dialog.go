@@ -19,6 +19,7 @@ type TextDialog struct {
 
 	BackgroundTexture render.Texture
 	FontFace          font.Face
+	LineHeight        float64
 	Dialogs           utils.List[Dialog]
 	TextOffset        math.Vector
 }
@@ -46,10 +47,11 @@ func (dialog TextDialog) Draw(target render.RenderTarget, transform math.Transfo
 	}.Render()
 
 	render.MultilineText{
-		Lines:    dialog.Dialogs.GetCurrent().Lines,
-		FontFace: dialog.FontFace,
-		Target:   target,
-		Position: dialog.Position.Add(dialog.TextOffset),
+		Lines:      dialog.Dialogs.GetCurrent().Lines,
+		FontFace:   dialog.FontFace,
+		LineHeight: dialog.LineHeight,
+		Target:     target,
+		Position:   dialog.Position.Add(dialog.TextOffset),
 	}.Render()
 }
 

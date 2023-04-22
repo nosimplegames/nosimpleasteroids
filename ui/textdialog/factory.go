@@ -17,6 +17,7 @@ type Factory struct {
 	LineWidth         float64
 	Padding           ui.Padding
 	FontFace          font.Face
+	LineHeight        float64
 	Text              string
 	NextDialogTexture render.Texture
 }
@@ -30,6 +31,7 @@ func (factory Factory) Create() *TextDialog {
 	dialog.BackgroundTexture = factory.Slice9.Compose(targetSize)
 	dialog.Origin = targetSize.By(0.5)
 	dialog.Dialogs = factory.GetDialogs()
+	dialog.LineHeight = factory.LineHeight
 
 	nextDialogEntity := factory.CreateNextDialogEntity()
 	dialog.AddChild(nextDialogEntity)
@@ -40,7 +42,7 @@ func (factory Factory) Create() *TextDialog {
 }
 
 func (factory Factory) GetTargetSize() math.Vector {
-	lineHeight := utilstext.GetFontFaceHeight(factory.FontFace)
+	lineHeight := utilstext.GetFontFaceHeight(factory.FontFace) * factory.LineHeight
 
 	return math.Vector{
 		X: factory.LineWidth + factory.Padding.Right + factory.Padding.Left,
@@ -81,6 +83,7 @@ func (factory Factory) GetDialogs() utils.List[Dialog] {
 			FontFace:       factory.FontFace,
 			LineWidth:      factory.LineWidth,
 			Text:           factory.Text,
+			LineHeight:     factory.LineHeight,
 		}.Create(),
 	}
 }

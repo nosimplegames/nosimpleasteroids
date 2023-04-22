@@ -12,6 +12,7 @@ type DialogsFactory struct {
 	TextLinesCount int
 	FontFace       font.Face
 	LineWidth      float64
+	LineHeight     float64
 	Text           string
 }
 
@@ -39,7 +40,8 @@ func (factory DialogsFactory) Create() []Dialog {
 }
 
 func (factory DialogsFactory) GetTextLines() []string {
-	lineHeight := utilstext.GetFontFaceHeight(factory.FontFace)
+	fontHeight := utilstext.GetFontFaceHeight(factory.FontFace)
+	lineHeight := fontHeight * factory.LineHeight
 
 	textLines, _ := render.TextLinesCalculator{
 		Text:       factory.Text,

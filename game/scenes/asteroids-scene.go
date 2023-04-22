@@ -60,6 +60,7 @@ func (scene *AsteroidsScene) startConversation(conversation string, callback fun
 	textDialog := textdialog.Factory{
 		Slice9:         assets.TextDialogSlice9,
 		TextLinesCount: 2,
+		LineHeight:     2,
 		Text:           conversation,
 		FontFace:       assets.UIFontFace,
 		LineWidth:      300,
