@@ -5,9 +5,9 @@ import "simple-games.com/asteroids/math"
 type ICollisionable interface {
 	GetSize() math.Vector
 	GetPosition() math.Vector
-	OnCollision(collisionMask string)
+	GetCollisionMask() string
 	CanCollide() bool
 	CanCollideWith(collisionMask string) bool
-	GetCollisionMask() string
+	OnCollision(collisionMask string)
 	IsAlive() bool
 }

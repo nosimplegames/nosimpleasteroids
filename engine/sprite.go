@@ -6,7 +6,6 @@ import (
 )
 
 type Sprite struct {
-	math.Transformable
 	Entity
 
 	Texture render.Texture

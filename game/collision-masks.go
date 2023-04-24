@@ -1,7 +1,9 @@
 package game
 
 const (
-	AsteroidCollisionMask  string = "AsteroidCollisionMask"
-	BulletCollisionMask    string = "BulletCollisionMask"
-	SpaceshipCollisionMask string = "SpaceshipCollisionMask"
+	AsteroidCollisionMask        string = "AsteroidCollisionMask"
+	BulletCollisionMask                 = "BulletCollisionMask"
+	SpaceshipCollisionMask              = "SpaceshipCollisionMask"
+	SpaceshipShieldCollisionMask        = "SpaceshipShieldCollisionMask"
+	EnergyBlastCollisionMask            = "EnergyBlastCollisionMask"
 )

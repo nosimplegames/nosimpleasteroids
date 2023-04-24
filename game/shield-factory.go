@@ -15,6 +15,9 @@ func (factory ShieldFactory) Create() *Shield {
 	engine.GetAnimations().AddAnimation(shield.Animation)
 	shield.Origin = math.Vector{X: 16, Y: 16}
 	shield.Position = math.Vector{X: 8, Y: 8}
+	shield.Size = math.Vector{X: 32, Y: 32}
+
+	engine.GetWorld().AddCollisinable(shield)
 
 	return shield
 }

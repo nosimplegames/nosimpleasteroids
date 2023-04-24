@@ -1,14 +1,12 @@
 package game
 
 import (
-	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/particles"
 	"simple-games.com/asteroids/render"
 )
 
 type Bullet struct {
-	engine.Entity
 	Inert
 	particles.Particle
 }

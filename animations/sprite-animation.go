@@ -14,7 +14,6 @@ type SpriteAnimation struct {
 	Frames            []math.Box
 	FrameDuration     float64
 	CurrentFrameTime  float64
-	Foo               int
 }
 
 func (animation *SpriteAnimation) Update() {

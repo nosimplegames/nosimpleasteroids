@@ -12,7 +12,6 @@ import (
 type OnDestroyCallback func()
 
 type Spaceship struct {
-	math.Transformable
 	events.EventTarget
 	engine.Entity
 
@@ -88,7 +87,9 @@ func (spaceship *Spaceship) OnCollision(collisionMask string) {
 	}
 }
 
-func (spaceship *Spaceship) ActivateShield() {
+func (spaceship *Spaceship) ActivateShield() *Shield {
 	shield := spaceship.ShieldGenerator.ActivateShield()
 	spaceship.AddChild(shield)
+
+	return shield
 }

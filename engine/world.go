@@ -29,15 +29,15 @@ func (world *World) TestCollisions() {
 		}
 
 		for j := i + 1; j < len(world.Collisionables); j++ {
-			rightCollisinable := world.Collisionables[j]
-			mustTestCollision := rightCollisinable.IsAlive() &&
-				rightCollisinable.CanCollide() &&
-				leftCollisionable.CanCollideWith(rightCollisinable.GetCollisionMask())
+			rightCollisionable := world.Collisionables[j]
+			mustTestCollision := rightCollisionable.IsAlive() &&
+				rightCollisionable.CanCollide() &&
+				leftCollisionable.CanCollideWith(rightCollisionable.GetCollisionMask())
 
 			if mustTestCollision {
 				collision := physics.Collision{
 					LeftCollisionable:  leftCollisionable,
-					RightCollisionable: rightCollisinable,
+					RightCollisionable: rightCollisionable,
 				}
 
 				collision.ReportIfHapenning()

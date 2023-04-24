@@ -1,6 +1,8 @@
 package physics
 
-import "simple-games.com/asteroids/math"
+import (
+	"simple-games.com/asteroids/math"
+)
 
 type Collision struct {
 	LeftCollisionable  ICollisionable

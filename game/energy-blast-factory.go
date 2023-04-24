@@ -1,6 +1,7 @@
 package game
 
 import (
+	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
 )
@@ -11,19 +12,20 @@ type EnergyBlastFactory struct {
 func (factory EnergyBlastFactory) Create() *EnergyBlast {
 	blast := &EnergyBlast{}
 	blast.Texture = factory.GetTexture()
-	blast.Inert.Origin = math.Vector{X: 16, Y: 400}
-	blast.Inert.Position = math.Vector{X: 400, Y: 16}
-	blast.Inert.Rotation = math.DegreesToRads(90)
+	blast.Origin = math.Vector{X: 16, Y: 400}
+	blast.Position = math.Vector{X: 400, Y: 16}
+	blast.Rotation = math.DegreesToRads(90)
 	blast.Speed = 10
+	// Size depends on rotation as we're using AABB
+	blast.Size = math.Vector{X: 800, Y: 32}
+
+	engine.GetWorld().AddCollisinable(blast)
 
 	return blast
 }
 
 func (factory EnergyBlastFactory) GetTexture() render.Texture {
-	targetSize := math.Vector{
-		X: 32,
-		Y: 800,
-	}
+	targetSize := factory.GetTargetSize()
 	texture := render.TextureFactory{
 		TargetSize: targetSize,
 	}.Create()
@@ -38,4 +40,11 @@ func (factory EnergyBlastFactory) GetTexture() render.Texture {
 	}.Repeat()
 
 	return texture
+}
+
+func (factory EnergyBlastFactory) GetTargetSize() math.Vector {
+	return math.Vector{
+		X: 32,
+		Y: 800,
+	}
 }

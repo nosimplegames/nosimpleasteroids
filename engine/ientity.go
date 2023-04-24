@@ -13,5 +13,10 @@ type IEntity interface {
 	Die()
 	GetChildren() []IEntity
 	RemoveDeadChildren()
+
 	GetTransform() math.Transform
+	GetAncestorsTransform() math.Transform
+
+	SetParent(IEntity)
+	GetParent() IEntity
 }

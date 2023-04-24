@@ -2,7 +2,6 @@ package game
 
 import (
 	"github.com/hajimehoshi/ebiten"
-	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/particles"
 	"simple-games.com/asteroids/render"
@@ -19,7 +18,6 @@ const (
 type OnExplodeFn = func(*Asteroid)
 
 type Asteroid struct {
-	engine.Entity
 	Inert
 	particles.Particle
 

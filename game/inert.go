@@ -1,9 +1,12 @@
 package game
 
-import "simple-games.com/asteroids/math"
+import (
+	"simple-games.com/asteroids/engine"
+	"simple-games.com/asteroids/math"
+)
 
 type Inert struct {
-	math.Transformable
+	engine.Sprite
 
 	Speed float64
 }

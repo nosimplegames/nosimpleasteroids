@@ -1,6 +1,8 @@
 package scenes
 
 import (
+	"fmt"
+
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/events"
 	"simple-games.com/asteroids/game"
@@ -17,7 +19,7 @@ type AsteroidsScene struct {
 
 func (scene *AsteroidsScene) Init() {
 	scene.createPlayer()
-	scene.startInitialConversation()
+	scene.startConversationAfterAsteroids()
 }
 
 func (scene *AsteroidsScene) createPlayer() {
@@ -30,7 +32,7 @@ func (scene *AsteroidsScene) createPlayer() {
 }
 
 func (scene *AsteroidsScene) startInitialConversation() {
-	scene.startConversation("Where am I? Command Center is not responding and navigation system is not working at all... What is that?... Is it... an asteroids!?", scene.onInitialConversationEnds)
+	scene.startConversation("Where am I? Command Center is not responding and navigation system is not working at all... What is that?... Is it... an asteroid!?", scene.onInitialConversationEnds)
 }
 
 func (scene *AsteroidsScene) onInitialConversationEnds() {
@@ -88,9 +90,8 @@ func (scene *AsteroidsScene) startConversation(conversation string, callback fun
 func (scene *AsteroidsScene) createEnergyBlast() {
 	blast := game.EnergyBlastFactory{}.Create()
 	scene.AddChild(blast)
-	scene.Player.ActivateShield()
+	shield := scene.Player.ActivateShield()
+	shield.OnDestroy.AddCallback(func() {
+		fmt.Println("Run destroy animation here")
+	})
 }
-
-// func (scene *AsteroidsScene) createScore() {
-// scene.AddChild(game.GetScore())
-// }
