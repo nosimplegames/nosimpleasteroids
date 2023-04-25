@@ -9,7 +9,6 @@ import (
 
 type Explosion struct {
 	engine.Entity
-	math.Transformable
 
 	Animation *animations.SpriteAnimation
 }

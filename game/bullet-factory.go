@@ -18,6 +18,7 @@ func (factory BulletFactory) Create() *Bullet {
 	bullet.Rotation = factory.Rotation
 	bullet.LifeTime = 0.4
 	bullet.Speed = 15
+	bullet.Texture = GetAssets().BulletTexture
 
 	engine.GetWorld().AddCollisinable(bullet)
 

@@ -19,7 +19,7 @@ type AsteroidsScene struct {
 
 func (scene *AsteroidsScene) Init() {
 	scene.createPlayer()
-	scene.startConversationAfterAsteroids()
+	scene.startInitialConversation()
 }
 
 func (scene *AsteroidsScene) createPlayer() {

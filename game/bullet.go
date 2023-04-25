@@ -3,7 +3,6 @@ package game
 import (
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/particles"
-	"simple-games.com/asteroids/render"
 )
 
 type Bullet struct {
@@ -17,14 +16,6 @@ func (bullet *Bullet) HandleInput() {
 func (bullet *Bullet) Update() {
 	bullet.Inert.Update()
 	bullet.Live()
-}
-
-func (bullet Bullet) Draw(target render.RenderTarget, transform math.Transform) {
-	render.Sprite{
-		Texture:   GetAssets().BulletTexture,
-		Transform: transform,
-		Target:    target,
-	}.Render()
 }
 
 func (bullet Bullet) CanCollide() bool {

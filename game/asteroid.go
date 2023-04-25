@@ -1,10 +1,8 @@
 package game
 
 import (
-	"github.com/hajimehoshi/ebiten"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/particles"
-	"simple-games.com/asteroids/render"
 )
 
 type AsteroidSize int
@@ -22,7 +20,6 @@ type Asteroid struct {
 	particles.Particle
 
 	Size         AsteroidSize
-	Texture      *ebiten.Image
 	SizeInPixels math.Vector
 	LifePoints   int
 
@@ -70,14 +67,6 @@ func (asteroid *Asteroid) SetSize(size AsteroidSize) {
 	}
 
 	asteroid.Origin = asteroid.SizeInPixels.By(0.5)
-}
-
-func (asteroid Asteroid) Draw(target render.RenderTarget, transform math.Transform) {
-	render.Sprite{
-		Texture:   asteroid.Texture,
-		Transform: transform,
-		Target:    target,
-	}.Render()
 }
 
 func (asteroid Asteroid) CanCollide() bool {
