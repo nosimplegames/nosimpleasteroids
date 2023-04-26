@@ -27,8 +27,7 @@ type Assets struct {
 
 	UIFontFace font.Face
 
-	RespawningAnimation animations.AnimationList
-
+	FadeInAnimatorFactory          animators.AlphaAnimatorFactory
 	SmallExplosionAnimatorFactory  animators.SpriteAnimatorFactory
 	BigExplosionAnimatorFactory    animators.SpriteAnimatorFactory
 	SpaceshipShieldAnimatorFactory animators.SpriteAnimatorFactory
@@ -68,12 +67,10 @@ func GetAssets() *Assets {
 				DPI:          72,
 				FontFileName: "./res/dogicapixel.ttf",
 			}.Create(),
-
-			RespawningAnimation: CreateRespawningAnimation(),
 		}
 
 		globalAssets.SmallExplosionAnimatorFactory = animators.SpriteAnimatorFactory{
-			SpriteAnimation: animations.SpriteAnimationFactory{
+			Animation: animations.SpriteAnimationFactory{
 				Texture:       globalAssets.SmallExplosionTexture,
 				FrameDuration: 1.0 / 48.0,
 				FrameSize: math.Vector{
@@ -83,7 +80,7 @@ func GetAssets() *Assets {
 			}.Create(),
 		}
 		globalAssets.BigExplosionAnimatorFactory = animators.SpriteAnimatorFactory{
-			SpriteAnimation: animations.SpriteAnimationFactory{
+			Animation: animations.SpriteAnimationFactory{
 				Texture:       globalAssets.BigExplosionTexture,
 				FrameDuration: 1.0 / 24.0,
 				FrameSize: math.Vector{
@@ -93,7 +90,7 @@ func GetAssets() *Assets {
 			}.Create(),
 		}
 		globalAssets.SpaceshipShieldAnimatorFactory = animators.SpriteAnimatorFactory{
-			SpriteAnimation: animations.SpriteAnimationFactory{
+			Animation: animations.SpriteAnimationFactory{
 				Texture:       globalAssets.ShieldTexture,
 				FrameDuration: 1.0 / 14.0,
 				FrameSize: math.Vector{
@@ -103,23 +100,14 @@ func GetAssets() *Assets {
 				FrameCount: 7,
 			}.Create(),
 		}
+		globalAssets.FadeInAnimatorFactory = animators.AlphaAnimatorFactory{
+			Animation: animations.NumberAnimationFactory{
+				InitialValue: 0,
+				TargetValue:  1,
+				Duration:     0.2,
+			}.Create(),
+		}
 	}
 
 	return globalAssets
-}
-
-func CreateRespawningAnimation() animations.AnimationList {
-	fadeInAnimation := animations.AlphaAnimationFactory{
-		InitialValue: 0,
-		TargetValue:  1,
-		Duration:     0.2,
-	}.Create()
-
-	animationList := animations.AnimationLoopFactory{
-		Animation:        &fadeInAnimation,
-		LoopCount:        4,
-		IncludeBackwards: true,
-	}.Create()
-
-	return animationList
 }

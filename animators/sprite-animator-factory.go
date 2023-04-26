@@ -3,14 +3,21 @@ package animators
 import "simple-games.com/asteroids/animations"
 
 type SpriteAnimatorFactory struct {
-	SpriteAnimation animations.SpriteAnimation
+	Animation animations.SpriteAnimation
 }
 
-func (factory SpriteAnimatorFactory) Create(target ISprite) SpriteAnimator {
-	animator := SpriteAnimator{}
-	animator.SpriteAnimation = *factory.SpriteAnimation.Copy().(*animations.SpriteAnimation)
+func (factory SpriteAnimatorFactory) Create(target ISprite) *SpriteAnimator {
+	animator := &SpriteAnimator{}
+
+	spriteAnimation := factory.Animation.Copy().(*animations.SpriteAnimation)
+	animator.Animation = spriteAnimation
+
 	animator.Target = target
-	animator.Target.SetTexture(animator.SpriteAnimation.Texture)
+	animator.Target.SetTexture(spriteAnimation.Texture)
+
+	animator.AnimateTarget = func(target ISprite, animation *animations.SpriteAnimation) {
+		target.SetRect(animation.GetCurrentRect())
+	}
 
 	return animator
 }

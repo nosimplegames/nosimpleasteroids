@@ -22,14 +22,14 @@ func (factory ExplosionFactory) Create() {
 	explosion := &engine.Sprite{}
 
 	explosion.Position = factory.Position
-	animation := factory.GetAnimation(explosion)
-	animation.OnStop.AddCallback(explosion.Die)
+	animator := factory.GetAnimator(explosion)
+	animator.Animation.OnStop.AddCallback(explosion.Die)
 
-	engine.GetAnimations().AddAnimation(animation)
+	engine.GetAnimations().AddAnimation(animator)
 	engine.GetEntities().AddEntity(explosion)
 }
 
-func (factory ExplosionFactory) GetAnimation(explosion *engine.Sprite) *animators.SpriteAnimator {
+func (factory ExplosionFactory) GetAnimator(explosion *engine.Sprite) *animators.SpriteAnimator {
 	assets := GetAssets()
 	animatorFactory := assets.SmallExplosionAnimatorFactory
 	mustUseBigExplosionAnimation := factory.ExplosionSize == BigExplosion
@@ -39,5 +39,5 @@ func (factory ExplosionFactory) GetAnimation(explosion *engine.Sprite) *animator
 	}
 
 	animation := animatorFactory.Create(explosion)
-	return &animation
+	return animation
 }

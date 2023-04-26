@@ -8,6 +8,8 @@ type SpaceshipFactory struct {
 func (factory SpaceshipFactory) Create() *Spaceship {
 	spaceship := &Spaceship{}
 
+	spaceship.Texture = GetAssets().SpaceshipTexture
+
 	spaceship.Propulsor = Engine{
 		MinSpeed:      0.3,
 		Acceleration:  0.05,

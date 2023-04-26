@@ -27,3 +27,29 @@ func (animation NumberAnimation) HasFinished() bool {
 
 	return animation.CurrentValue <= animation.TargetValue
 }
+
+func (animation NumberAnimation) Copy() IAnimation {
+	copy := &NumberAnimation{
+		InitialValue: animation.InitialValue,
+		TargetValue:  animation.TargetValue,
+		CurrentValue: animation.InitialValue,
+		FrameStep:    animation.FrameStep,
+	}
+
+	copy.State = AnimationRunning
+
+	return copy
+}
+
+func (animation NumberAnimation) Reverse() IAnimation {
+	copy := &NumberAnimation{
+		InitialValue: animation.TargetValue,
+		TargetValue:  animation.InitialValue,
+		CurrentValue: animation.TargetValue,
+		FrameStep:    -animation.FrameStep,
+	}
+
+	copy.State = AnimationRunning
+
+	return copy
+}

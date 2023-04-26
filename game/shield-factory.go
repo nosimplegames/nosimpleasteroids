@@ -28,7 +28,7 @@ func (factory ShieldFactory) GetAnimation(shield *Shield) *animations.AnimationL
 	shieldAnimation := GetAssets().SpaceshipShieldAnimatorFactory.Create(shield)
 
 	animation := animations.AnimationLoopFactory{
-		Animation: &shieldAnimation,
+		Animation: shieldAnimation,
 		LoopCount: 4,
 	}.Create()
 

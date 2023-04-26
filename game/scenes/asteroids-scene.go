@@ -25,6 +25,7 @@ func (scene *AsteroidsScene) Init() {
 func (scene *AsteroidsScene) createPlayer() {
 	player := game.PlayerFactory{
 		IsControllerDisabled: true,
+		IsPlayerRespawning:   true,
 	}.Create()
 
 	scene.Player = player

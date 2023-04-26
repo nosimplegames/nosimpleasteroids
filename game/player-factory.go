@@ -30,12 +30,17 @@ func (factory PlayerFactory) Create() *Player {
 	// engine animations but player will still has a pointer to it,
 	// even though it will be returning target value, player pointer may be null
 	if factory.IsPlayerRespawning {
-		animation := factory.GetRespawiningAnimation()
-		player.RespawningAnimation = animation
+		player.IsRespawning = true
+
+		animation := factory.GetRespawiningAnimation(player)
+		animation.OnStop.AddCallback(func() {
+			player.IsRespawning = false
+		})
+
 		engine.GetAnimations().AddAnimation(animation)
 	}
 
-	player.OnDestroy = func() {
+	player.OnDie.AddCallback(func() {
 		engine.GetTimer().AddTimeout(&engine.Timeout{
 			Callback: func() {
 				player := PlayerFactory{
@@ -50,14 +55,20 @@ func (factory PlayerFactory) Create() *Player {
 			Position:      player.Position,
 			ExplosionSize: BigExplosion,
 		}.Create()
-	}
+	})
 
 	engine.GetWorld().AddCollisinable(player)
 	return player
 }
 
-func (factory PlayerFactory) GetRespawiningAnimation() *animations.AnimationList {
-	animation := GetAssets().RespawningAnimation.Copy()
+func (factory PlayerFactory) GetRespawiningAnimation(player *Player) *animations.AnimationList {
+	fadeInAnimation := GetAssets().FadeInAnimatorFactory.Create(player)
+	animation := animations.AnimationLoopFactory{
+		Animation:        fadeInAnimation,
+		LoopCount:        3,
+		IncludeBackwards: true,
+	}.Create()
+	animation.AddAnimation(fadeInAnimation.Copy())
 
-	return animation.(*animations.AnimationList)
+	return &animation
 }

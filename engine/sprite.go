@@ -7,6 +7,7 @@ import (
 
 type Sprite struct {
 	Entity
+	Colorable
 
 	Rect    *math.Box
 	Texture render.Texture
@@ -31,5 +32,6 @@ func (sprite Sprite) Draw(target render.RenderTarget, transform math.Transform) 
 		Target:    target,
 		Transform: transform,
 		Rect:      sprite.Rect,
+		ColorM:    sprite.ColorM,
 	}.Render()
 }
