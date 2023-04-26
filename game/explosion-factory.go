@@ -1,7 +1,7 @@
 package game
 
 import (
-	"simple-games.com/asteroids/animations"
+	"simple-games.com/asteroids/animators"
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/math"
 )
@@ -19,23 +19,25 @@ type ExplosionFactory struct {
 }
 
 func (factory ExplosionFactory) Create() {
-	explosion := &Explosion{}
+	explosion := &engine.Sprite{}
 
 	explosion.Position = factory.Position
-	explosion.Animation = factory.GetAnimation()
-	engine.GetAnimations().AddAnimation(explosion.Animation)
+	animation := factory.GetAnimation(explosion)
+	animation.OnStop.AddCallback(explosion.Die)
+
+	engine.GetAnimations().AddAnimation(animation)
 	engine.GetEntities().AddEntity(explosion)
 }
 
-func (factory ExplosionFactory) GetAnimation() *animations.SpriteAnimation {
+func (factory ExplosionFactory) GetAnimation(explosion *engine.Sprite) *animators.SpriteAnimator {
 	assets := GetAssets()
-	animation := assets.SmallExplosionAnimation
+	animatorFactory := assets.SmallExplosionAnimatorFactory
 	mustUseBigExplosionAnimation := factory.ExplosionSize == BigExplosion
 
 	if mustUseBigExplosionAnimation {
-		animation = assets.BigExplosionAnimation
+		animatorFactory = assets.BigExplosionAnimatorFactory
 	}
 
-	spriteAnimation := animation.Copy()
-	return spriteAnimation.(*animations.SpriteAnimation)
+	animation := animatorFactory.Create(explosion)
+	return &animation
 }

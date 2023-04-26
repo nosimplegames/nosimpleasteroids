@@ -8,7 +8,16 @@ import (
 type Sprite struct {
 	Entity
 
+	Rect    *math.Box
 	Texture render.Texture
+}
+
+func (sprite *Sprite) SetRect(rect *math.Box) {
+	sprite.Rect = rect
+}
+
+func (sprite *Sprite) SetTexture(texture render.Texture) {
+	sprite.Texture = texture
 }
 
 func (sprite *Sprite) SetOriginCenter() {
@@ -21,5 +30,6 @@ func (sprite Sprite) Draw(target render.RenderTarget, transform math.Transform) 
 		Texture:   sprite.Texture,
 		Target:    target,
 		Transform: transform,
+		Rect:      sprite.Rect,
 	}.Render()
 }

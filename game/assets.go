@@ -3,6 +3,7 @@ package game
 import (
 	"golang.org/x/image/font"
 	"simple-games.com/asteroids/animations"
+	"simple-games.com/asteroids/animators"
 	"simple-games.com/asteroids/assets"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
@@ -26,10 +27,11 @@ type Assets struct {
 
 	UIFontFace font.Face
 
-	SmallExplosionAnimation animations.SpriteAnimation
-	BigExplosionAnimation   animations.SpriteAnimation
-	ShieldAnimation         animations.SpriteAnimation
-	RespawningAnimation     animations.AnimationList
+	RespawningAnimation animations.AnimationList
+
+	SmallExplosionAnimatorFactory  animators.SpriteAnimatorFactory
+	BigExplosionAnimatorFactory    animators.SpriteAnimatorFactory
+	SpaceshipShieldAnimatorFactory animators.SpriteAnimatorFactory
 }
 
 var globalAssets *Assets = nil
@@ -70,31 +72,37 @@ func GetAssets() *Assets {
 			RespawningAnimation: CreateRespawningAnimation(),
 		}
 
-		globalAssets.SmallExplosionAnimation = animations.SpriteAnimationFactory{
-			Texture:       globalAssets.SmallExplosionTexture,
-			FrameDuration: 1.0 / 48.0,
-			FrameSize: math.Vector{
-				X: 20,
-				Y: 20,
-			},
-		}.Create()
-		globalAssets.BigExplosionAnimation = animations.SpriteAnimationFactory{
-			Texture:       globalAssets.BigExplosionTexture,
-			FrameDuration: 1.0 / 24.0,
-			FrameSize: math.Vector{
-				X: 32,
-				Y: 32,
-			},
-		}.Create()
-		globalAssets.ShieldAnimation = animations.SpriteAnimationFactory{
-			Texture:       globalAssets.ShieldTexture,
-			FrameDuration: 1.0 / 14.0,
-			FrameSize: math.Vector{
-				X: 32,
-				Y: 32,
-			},
-			FrameCount: 7,
-		}.Create()
+		globalAssets.SmallExplosionAnimatorFactory = animators.SpriteAnimatorFactory{
+			SpriteAnimation: animations.SpriteAnimationFactory{
+				Texture:       globalAssets.SmallExplosionTexture,
+				FrameDuration: 1.0 / 48.0,
+				FrameSize: math.Vector{
+					X: 20,
+					Y: 20,
+				},
+			}.Create(),
+		}
+		globalAssets.BigExplosionAnimatorFactory = animators.SpriteAnimatorFactory{
+			SpriteAnimation: animations.SpriteAnimationFactory{
+				Texture:       globalAssets.BigExplosionTexture,
+				FrameDuration: 1.0 / 24.0,
+				FrameSize: math.Vector{
+					X: 32,
+					Y: 32,
+				},
+			}.Create(),
+		}
+		globalAssets.SpaceshipShieldAnimatorFactory = animators.SpriteAnimatorFactory{
+			SpriteAnimation: animations.SpriteAnimationFactory{
+				Texture:       globalAssets.ShieldTexture,
+				FrameDuration: 1.0 / 14.0,
+				FrameSize: math.Vector{
+					X: 32,
+					Y: 32,
+				},
+				FrameCount: 7,
+			}.Create(),
+		}
 	}
 
 	return globalAssets

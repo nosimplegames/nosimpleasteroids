@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"simple-games.com/asteroids/events"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
 	"simple-games.com/asteroids/utils"
@@ -13,6 +14,7 @@ type Entity struct {
 
 	Parent IEntity
 	IsDead bool
+	OnDie  events.Signal
 }
 
 func (entity *Entity) HandleInput() {
@@ -27,6 +29,7 @@ func (entity Entity) IsAlive() bool {
 
 func (entity *Entity) Die() {
 	entity.IsDead = true
+	entity.OnDie.Fire()
 }
 
 func (entity Entity) Draw(target render.RenderTarget, combinedTransform math.Transform) {

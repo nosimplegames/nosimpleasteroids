@@ -91,7 +91,7 @@ func (scene *AsteroidsScene) createEnergyBlast() {
 	blast := game.EnergyBlastFactory{}.Create()
 	scene.AddChild(blast)
 	shield := scene.Player.ActivateShield()
-	shield.OnDestroy.AddCallback(func() {
+	shield.OnDie.AddCallback(func() {
 		fmt.Println("Run destroy animation here")
 	})
 }

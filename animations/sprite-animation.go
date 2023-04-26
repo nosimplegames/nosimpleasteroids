@@ -36,16 +36,20 @@ func (animation *SpriteAnimation) Update() {
 	}
 }
 
-func (animation SpriteAnimation) GetCurrentSprite() render.Sprite {
+func (animation SpriteAnimation) GetCurrentRect() *math.Box {
 	var rect *math.Box = &math.Box{}
 
 	if animation.IsRunning() {
 		rect = &animation.Frames[animation.CurrentFrameIndex]
 	}
 
+	return rect
+}
+
+func (animation SpriteAnimation) GetCurrentSprite() render.Sprite {
 	return render.Sprite{
 		Texture: animation.Texture,
-		Rect:    rect,
+		Rect:    animation.GetCurrentRect(),
 	}
 }
 

@@ -13,6 +13,7 @@ const (
 type Animation struct {
 	State AnimationState
 	events.EventTarget
+	OnStop events.Signal
 }
 
 func (animation Animation) IsAlive() bool {
@@ -28,4 +29,5 @@ func (animation *Animation) Stop() {
 	animation.DispatchEvent(events.Event{
 		Type: AnimationStoppedEvent,
 	})
+	animation.OnStop.Fire()
 }
