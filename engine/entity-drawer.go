@@ -12,6 +12,10 @@ type EntityDrawer struct {
 }
 
 func (drawer EntityDrawer) Draw() {
+	if !drawer.Entity.IsAlive() {
+		return
+	}
+
 	transform := drawer.Entity.GetTransform()
 	transform.Concat(drawer.Transform)
 

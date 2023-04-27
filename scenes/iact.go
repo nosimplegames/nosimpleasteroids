@@ -1,0 +1,13 @@
+package scenes
+
+import (
+	"simple-games.com/asteroids/engine"
+	"simple-games.com/asteroids/utils"
+)
+
+type IAct interface {
+	engine.IEntity
+
+	Openning(*Scene)
+	OnDie(utils.Callback)
+}

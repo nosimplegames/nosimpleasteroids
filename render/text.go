@@ -14,10 +14,12 @@ type Text struct {
 	FontFace font.Face
 	Target   *ebiten.Image
 	Position math.Vector
+	ColorM   math.ColorM
 }
 
 func (text Text) Render() {
 	x, y := text.GetRenderingPosition()
+	color := text.ColorM.Apply(color.White)
 
 	ebitenText.Draw(
 		text.Target,
@@ -25,7 +27,7 @@ func (text Text) Render() {
 		text.FontFace,
 		x,
 		y,
-		color.White,
+		color,
 	)
 }
 

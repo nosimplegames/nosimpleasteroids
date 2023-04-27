@@ -11,6 +11,7 @@ type IEntity interface {
 	Draw(target render.RenderTarget, combinedTransform math.Transform)
 	IsAlive() bool
 	Die()
+
 	GetChildren() []IEntity
 	RemoveDeadChildren()
 
@@ -19,4 +20,6 @@ type IEntity interface {
 
 	SetParent(IEntity)
 	GetParent() IEntity
+
+	GetId() string
 }

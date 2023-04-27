@@ -15,6 +15,7 @@ func (factory PlayerFactory) Create() *Player {
 	player := &Player{}
 	player.Spaceship = *SpaceshipFactory{}.Create()
 	player.IsControllerEnabled = !factory.IsControllerDisabled
+	player.Id = "player"
 
 	player.HealthBar = PlayerHealthBarFactory{}.Create()
 	// player.AddChild(player.HealthBar)
@@ -40,22 +41,22 @@ func (factory PlayerFactory) Create() *Player {
 		engine.GetAnimations().AddAnimation(animation)
 	}
 
-	player.OnDie.AddCallback(func() {
-		engine.GetTimer().AddTimeout(&engine.Timeout{
-			Callback: func() {
-				player := PlayerFactory{
-					IsPlayerRespawning: true,
-				}.Create()
-				engine.GetEntities().AddEntity(player)
-			},
-			Time: 1.5,
-		})
+	// player.OnDie.AddCallback(func() {
+	// 	engine.GetTimer().AddTimeout(&engine.Timeout{
+	// 		Callback: func() {
+	// 			player := PlayerFactory{
+	// 				IsPlayerRespawning: true,
+	// 			}.Create()
+	// 			engine.GetEntities().AddEntity(player)
+	// 		},
+	// 		Time: 1.5,
+	// 	})
 
-		ExplosionFactory{
-			Position:      player.Position,
-			ExplosionSize: BigExplosion,
-		}.Create()
-	})
+	// 	ExplosionFactory{
+	// 		Position:      player.Position,
+	// 		ExplosionSize: BigExplosion,
+	// 	}.Create()
+	// })
 
 	engine.GetWorld().AddCollisinable(player)
 	return player

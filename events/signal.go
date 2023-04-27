@@ -1,8 +1,10 @@
 package events
 
+import "simple-games.com/asteroids/utils"
+
 type SignalData interface{}
 type SignalTCallback func(data SignalData)
-type SignalCallback func()
+type SignalCallback = utils.Callback
 
 type Signal struct {
 	Callbacks []SignalTCallback

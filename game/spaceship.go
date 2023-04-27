@@ -22,7 +22,7 @@ type Spaceship struct {
 }
 
 func (spaceship Spaceship) IsAlive() bool {
-	return spaceship.LifePoints > 0
+	return spaceship.LifePoints > 0 && !spaceship.IsDead
 }
 
 func (spaceship Spaceship) GetSize() math.Vector {

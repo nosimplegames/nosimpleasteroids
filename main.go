@@ -2,13 +2,12 @@ package main
 
 import (
 	"simple-games.com/asteroids/engine"
-	"simple-games.com/asteroids/game/scenes"
+	"simple-games.com/asteroids/game/asteroidsscene"
 )
 
 func main() {
 	entities := engine.GetEntities()
-	scene := &scenes.AsteroidsScene{}
-	scene.Init()
+	scene := asteroidsscene.AsteroidsSceneFactory{}.Create()
 	entities.AddEntity(scene)
 	// entities.AddEntity(game.PlayerFactory{}.Create())
 	// entities.AddEntity(game.GetScore())

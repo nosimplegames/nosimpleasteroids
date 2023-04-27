@@ -25,9 +25,11 @@ type Assets struct {
 	NextDialogTexture render.Texture
 	TextDialogSlice9  render.Slice9
 
-	UIFontFace font.Face
+	UIFontFace    font.Face
+	TitleFontFace font.Face
 
 	FadeInAnimatorFactory          animators.AlphaAnimatorFactory
+	TitleFadeInAnimatorFactory     animators.AlphaAnimatorFactory
 	SmallExplosionAnimatorFactory  animators.SpriteAnimatorFactory
 	BigExplosionAnimatorFactory    animators.SpriteAnimatorFactory
 	SpaceshipShieldAnimatorFactory animators.SpriteAnimatorFactory
@@ -67,6 +69,12 @@ func GetAssets() *Assets {
 				DPI:          72,
 				FontFileName: "./res/dogicapixel.ttf",
 			}.Create(),
+
+			TitleFontFace: assets.FontFaceFactory{
+				Size:         60,
+				DPI:          72,
+				FontFileName: "./res/DayPosterShadowNF.ttf",
+			}.Create(),
 		}
 
 		globalAssets.SmallExplosionAnimatorFactory = animators.SpriteAnimatorFactory{
@@ -105,6 +113,13 @@ func GetAssets() *Assets {
 				InitialValue: 0,
 				TargetValue:  1,
 				Duration:     0.2,
+			}.Create(),
+		}
+		globalAssets.TitleFadeInAnimatorFactory = animators.AlphaAnimatorFactory{
+			Animation: animations.NumberAnimationFactory{
+				InitialValue: 0,
+				TargetValue:  1,
+				Duration:     3,
 			}.Create(),
 		}
 	}

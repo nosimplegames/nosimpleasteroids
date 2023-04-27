@@ -13,6 +13,7 @@ type MultilineText struct {
 	Target        RenderTarget
 	Position      math.Vector
 	TextAlignment TextAlignment
+	ColorM        math.ColorM
 }
 
 func (text MultilineText) Render() {
@@ -26,6 +27,7 @@ func (text MultilineText) Render() {
 			Target:   text.Target,
 			FontFace: text.FontFace,
 			Position: position,
+			ColorM:   text.ColorM,
 		}.Render()
 	}
 }

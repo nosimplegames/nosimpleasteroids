@@ -10,11 +10,17 @@ import (
 type Entity struct {
 	math.Transformable
 
+	Id string
+
 	Children []IEntity
 
 	Parent IEntity
 	IsDead bool
 	OnDie  events.Signal
+}
+
+func (entity Entity) GetId() string {
+	return entity.Id
 }
 
 func (entity *Entity) HandleInput() {
@@ -28,6 +34,10 @@ func (entity Entity) IsAlive() bool {
 }
 
 func (entity *Entity) Die() {
+	if entity.IsDead {
+		return
+	}
+
 	entity.IsDead = true
 	entity.OnDie.Fire()
 }
