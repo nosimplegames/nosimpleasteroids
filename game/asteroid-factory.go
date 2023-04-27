@@ -18,6 +18,7 @@ func (factory AsteroidFactory) Create() *Asteroid {
 	asteroid.Rotation = factory.Rotation
 	asteroid.Position = factory.Position
 	asteroid.OnExplode = OnAsteroidExplode
+	asteroid.Type = AsteroidEntityType
 
 	engine.GetWorld().AddCollisinable(asteroid)
 

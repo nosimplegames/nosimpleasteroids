@@ -1,9 +1,9 @@
 package engine
 
 type ITimeout interface {
+	ILiving
+
 	Update()
 	Exec()
-	IsAlive() bool
-	Die()
 	GetId() string
 }

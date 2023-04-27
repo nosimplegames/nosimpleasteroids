@@ -1,6 +1,9 @@
 package engine
 
 import (
+	"strconv"
+
+	"github.com/hajimehoshi/ebiten/ebitenutil"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
 	"simple-games.com/asteroids/utils"
@@ -31,6 +34,10 @@ func (entities Entities) EntityHandleInput(entity IEntity) {
 }
 
 func (entities Entities) EntityUpdate(entity IEntity) {
+	if !entity.IsRunning() {
+		return
+	}
+
 	entity.Update()
 
 	for _, child := range entity.GetChildren() {
@@ -52,10 +59,25 @@ func (entities Entities) Draw(target render.RenderTarget) {
 			Target:    target,
 		}.Draw()
 	}
+	ebitenutil.DebugPrint(target, strconv.Itoa(len(entities.Entities)))
 }
 
 func (entities *Entities) AddEntity(entity IEntity) {
 	entities.Entities = append(entities.Entities, entity)
+}
+
+func (entities Entities) IsThereEntitiesOfType(entityType string) bool {
+	for _, entity := range entities.Entities {
+		seeker := EntitySeeker{
+			Entity: entity,
+		}
+
+		if seeker.IsThereOfType(entityType) {
+			return true
+		}
+	}
+
+	return false
 }
 
 var entities *Entities = nil

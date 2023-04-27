@@ -6,6 +6,8 @@ import (
 	"simple-games.com/asteroids/math"
 )
 
+const SpaceshipEntityType = "spaceship"
+
 type Spaceship struct {
 	events.EventTarget
 	engine.Sprite
@@ -37,7 +39,7 @@ func (spaceship Spaceship) CanCollide() bool {
 }
 
 func (spaceship Spaceship) CanCollideWith(collisionMask string) bool {
-	return collisionMask == AsteroidCollisionMask
+	return collisionMask == AsteroidCollisionMask || collisionMask == SpaceshipTeleportCollisionMask
 }
 
 func (spaceship Spaceship) GetCollisionMask() string {
@@ -45,6 +47,12 @@ func (spaceship Spaceship) GetCollisionMask() string {
 }
 
 func (spaceship *Spaceship) OnCollision(collisionMask string) {
+	isCollidingWithTeleport := collisionMask == SpaceshipTeleportCollisionMask
+
+	if isCollidingWithTeleport {
+		return
+	}
+
 	spaceship.LifePoints -= 1
 	spaceship.DispatchEvent(events.Event{
 		Type: LifePointsChanged,

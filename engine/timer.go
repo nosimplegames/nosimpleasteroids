@@ -3,6 +3,8 @@ package engine
 import "simple-games.com/asteroids/utils"
 
 type Timer struct {
+	Living
+
 	Timeouts []ITimeout
 }
 

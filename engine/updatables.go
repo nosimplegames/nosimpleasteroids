@@ -1,5 +1,7 @@
 package engine
 
+import "simple-games.com/asteroids/utils"
+
 type Updatables struct {
 	Updatables []IUpdatable
 }
@@ -12,6 +14,8 @@ func (updatables *Updatables) Update() {
 	for _, updatable := range updatables.Updatables {
 		updatable.Update()
 	}
+
+	utils.RemoveDead(&updatables.Updatables)
 }
 
 var updatables *Updatables = nil

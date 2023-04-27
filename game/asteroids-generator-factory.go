@@ -12,6 +12,7 @@ const asteroidsGeneratorTimeoutId = "asteroids-generator-timeout"
 
 func (factory AsteroidsGeneratorFactory) Create() *AsteroidsGenerator {
 	generator := &AsteroidsGenerator{}
+	generator.TimeBetweenShoots = 2
 
 	generator.GenerationPoints = []AsteroidGenerationPoint{
 		{
@@ -48,18 +49,21 @@ func (factory AsteroidsGeneratorFactory) Create() *AsteroidsGenerator {
 		},
 	}
 
-	engine.GetTimer().AddTimeout(&engine.Timeout{
-		Time:     2,
-		Callback: generator.GenerateAsteroid,
-		IsLoop:   true,
-		Id:       asteroidsGeneratorTimeoutId,
-	})
+	engine.GetUpdatables().AddUpdatable(generator)
 
 	return generator
 }
 
-func InitAsteroidsGenerator() {
-	AsteroidsGeneratorFactory{}.Create()
+var asteroidsGenerator *AsteroidsGenerator = nil
+
+func GetAsteroidsGenerator() *AsteroidsGenerator {
+	mustInitGenerator := asteroidsGenerator == nil
+
+	if mustInitGenerator {
+		asteroidsGenerator = AsteroidsGeneratorFactory{}.Create()
+	}
+
+	return asteroidsGenerator
 }
 
 func StopAsteroidsGenerator() {

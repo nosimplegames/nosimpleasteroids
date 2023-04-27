@@ -15,6 +15,8 @@ const (
 
 type OnExplodeFn = func(*Asteroid)
 
+const AsteroidEntityType = "asteroid"
+
 type Asteroid struct {
 	Inert
 	particles.Particle
@@ -47,21 +49,21 @@ func (asteroid *Asteroid) SetSize(size AsteroidSize) {
 	case BigAsteroid:
 		asteroid.Texture = assets.BigAsteroidTexture
 		asteroid.Speed = 1.5
-		asteroid.LifeTime = 20
+		asteroid.LifeTime = 10
 		asteroid.LifePoints = 3
 		asteroid.SizeInPixels = math.Vector{X: 48, Y: 48}
 
 	case NormalAsteroid:
 		asteroid.Texture = assets.NormalAsteroidTexture
 		asteroid.Speed = 1.75
-		asteroid.LifeTime = 15
+		asteroid.LifeTime = 8
 		asteroid.LifePoints = 2
 		asteroid.SizeInPixels = math.Vector{X: 33, Y: 33}
 
 	case SmallAsteroid:
 		asteroid.Texture = assets.SmallAsteroidTexture
 		asteroid.Speed = 3
-		asteroid.LifeTime = 10
+		asteroid.LifeTime = 5
 		asteroid.LifePoints = 1
 		asteroid.SizeInPixels = math.Vector{X: 20, Y: 20}
 	}

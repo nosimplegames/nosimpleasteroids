@@ -7,6 +7,7 @@ type SpaceshipFactory struct {
 
 func (factory SpaceshipFactory) Create() *Spaceship {
 	spaceship := &Spaceship{}
+	spaceship.Type = SpaceshipEntityType
 
 	spaceship.Texture = GetAssets().SpaceshipTexture
 

@@ -54,7 +54,7 @@ func (act GameTitle) GetTitleAnimation(text *engine.MultilineText) *animations.A
 		Animation:             fadeInAnimator,
 		LoopCount:             1,
 		IncludeBackwards:      true,
-		TimeBetweenAnimations: 3,
+		TimeBetweenAnimations: 1,
 	}.Create()
 
 	return &animation

@@ -14,6 +14,10 @@ type BlastEnergy struct {
 	Player *game.Player
 }
 
+func (act BlastEnergy) MayBeSkipped() bool {
+	return !DoesPlayerExist()
+}
+
 func (act *BlastEnergy) Openning(scene *scenes.Scene) {
 	blast := game.EnergyBlastFactory{}.Create()
 	act.AddChild(blast)

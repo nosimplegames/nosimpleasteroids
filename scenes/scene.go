@@ -27,6 +27,11 @@ func (scene *Scene) PrepareAct(act *IAct) {
 		return
 	}
 
+	if (*act).MayBeSkipped() {
+		scene.PrepareAct(scene.Acts.Dequeue())
+		return
+	}
+
 	(*act).Openning(scene)
 	scene.AddChild(*act)
 	(*act).OnDie(func() {

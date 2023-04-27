@@ -1,48 +1,34 @@
 package engine
 
 import (
-	"simple-games.com/asteroids/events"
 	"simple-games.com/asteroids/math"
-	"simple-games.com/asteroids/render"
 	"simple-games.com/asteroids/utils"
 )
 
 type Entity struct {
 	math.Transformable
+	Living
+	Drawable
 
-	Id string
+	Id   string
+	Type string
 
 	Children []IEntity
-
-	Parent IEntity
-	IsDead bool
-	OnDie  events.Signal
+	Parent   IEntity
 }
 
 func (entity Entity) GetId() string {
 	return entity.Id
 }
 
+func (entity Entity) GetType() string {
+	return entity.Type
+}
+
 func (entity *Entity) HandleInput() {
 }
 
 func (entity *Entity) Update() {
-}
-
-func (entity Entity) IsAlive() bool {
-	return !entity.IsDead
-}
-
-func (entity *Entity) Die() {
-	if entity.IsDead {
-		return
-	}
-
-	entity.IsDead = true
-	entity.OnDie.Fire()
-}
-
-func (entity Entity) Draw(target render.RenderTarget, combinedTransform math.Transform) {
 }
 
 func (entity *Entity) AddChild(child IEntity) {

@@ -7,6 +7,8 @@ import (
 type TimeoutCallback func()
 
 type Timeout struct {
+	Living
+
 	Time        float64
 	CurrentTime float64
 	Callback    TimeoutCallback

@@ -14,7 +14,7 @@ type Conversation struct {
 func (act *Conversation) Openning(scene *scenes.Scene) {
 	act.Player.IsControllerEnabled = false
 	conversation := game.TextDialogFactory{
-		Conversation: "Where am I? Command Center is not responding and navigation system is not working at all... What is that?... Is it... an asteroid!?",
+		Conversation: act.Conversation,
 		OnEnd:        act.Die,
 	}.Create()
 

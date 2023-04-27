@@ -12,7 +12,8 @@ type EntityDrawer struct {
 }
 
 func (drawer EntityDrawer) Draw() {
-	if !drawer.Entity.IsAlive() {
+	canDraw := drawer.Entity.IsAlive() && drawer.Entity.IsVisible()
+	if !canDraw {
 		return
 	}
 

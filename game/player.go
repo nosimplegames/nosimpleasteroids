@@ -4,7 +4,6 @@ import (
 	"github.com/hajimehoshi/ebiten"
 	"github.com/hajimehoshi/ebiten/inpututil"
 	"simple-games.com/asteroids/math"
-	"simple-games.com/asteroids/render"
 )
 
 type Player struct {
@@ -61,12 +60,4 @@ func (player *Player) Update() {
 		Speed:    player.Propulsor.CurrentSpeed,
 	}.Calculate()
 	player.Move(movementVector)
-}
-
-func (player Player) IsAlive() bool {
-	return player.Spaceship.IsAlive()
-}
-
-func (player Player) Draw(target render.RenderTarget, transform math.Transform) {
-	player.Spaceship.Draw(target, transform)
 }

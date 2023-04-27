@@ -34,3 +34,7 @@ func (transformable Transformable) GetTransform() Transform {
 func (transformable Transformable) GetPosition() Vector {
 	return transformable.Position
 }
+
+func (transformable *Transformable) SetPosition(position Vector) {
+	transformable.Position = position
+}

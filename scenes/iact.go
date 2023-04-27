@@ -8,6 +8,7 @@ import (
 type IAct interface {
 	engine.IEntity
 
+	MayBeSkipped() bool
 	Openning(*Scene)
 	OnDie(utils.Callback)
 }
