@@ -2,7 +2,6 @@ package assets
 
 import (
 	"fmt"
-	"os"
 
 	"golang.org/x/image/font/sfnt"
 )
@@ -11,21 +10,25 @@ type FontManager struct {
 	Fonts map[string]*sfnt.Font
 }
 
-func (fontManager *FontManager) GetFont(fontFileName string) *sfnt.Font {
-	font := fontManager.Fonts[fontFileName]
+type FontData struct {
+	Bytes FontBytes
+	Name  string
+}
+
+func (fontManager *FontManager) GetFont(fontData FontData) *sfnt.Font {
+	font := fontManager.Fonts[fontData.Name]
 	fontAlreadyLoaded := font != nil
 
 	if !fontAlreadyLoaded {
-		font = fontManager.LoadFont(fontFileName)
-		fontManager.Fonts[fontFileName] = font
+		font = fontManager.LoadFont(fontData.Bytes)
+		fontManager.Fonts[fontData.Name] = font
 	}
 
 	return font
 }
 
-func (fontManager FontManager) LoadFont(fontFileName string) *sfnt.Font {
-	fontBytes := fontManager.GetFontBytes(fontFileName)
-	font, err := sfnt.Parse(fontBytes)
+func (fontManager FontManager) LoadFont(bytes FontBytes) *sfnt.Font {
+	font, err := sfnt.Parse(bytes)
 
 	if err != nil {
 		fmt.Println("Error getting font")
@@ -33,17 +36,6 @@ func (fontManager FontManager) LoadFont(fontFileName string) *sfnt.Font {
 	}
 
 	return font
-}
-
-func (fontManager FontManager) GetFontBytes(fontFileName string) []byte {
-	bytes, err := os.ReadFile(fontFileName)
-
-	if err != nil {
-		fmt.Println("Error getting font bytes")
-		panic(err)
-	}
-
-	return bytes
 }
 
 var fontManager *FontManager = nil

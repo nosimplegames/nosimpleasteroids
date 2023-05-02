@@ -1,28 +1,24 @@
 package assets
 
 import (
+	"bytes"
 	"image"
 	_ "image/png"
-	"os"
 
 	"github.com/hajimehoshi/ebiten"
 	"simple-games.com/asteroids/render"
 )
 
-func LoadTexture(textureFileName string) render.Texture {
-	textureFile, err := os.Open(textureFileName)
+type TextureBytes []byte
+
+func LoadTexture(textureBytes TextureBytes) render.Texture {
+	textureFile, _, err := image.Decode(bytes.NewReader(textureBytes))
 
 	if err != nil {
 		panic(err)
 	}
 
-	image, _, err := image.Decode(textureFile)
-
-	if err != nil {
-		panic(err)
-	}
-
-	texture, err := ebiten.NewImageFromImage(image, ebiten.FilterDefault)
+	texture, err := ebiten.NewImageFromImage(textureFile, ebiten.FilterDefault)
 
 	if err != nil {
 		panic(err)

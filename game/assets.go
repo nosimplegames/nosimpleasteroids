@@ -7,6 +7,7 @@ import (
 	"simple-games.com/asteroids/assets"
 	"simple-games.com/asteroids/math"
 	"simple-games.com/asteroids/render"
+	"simple-games.com/asteroids/res"
 )
 
 type Assets struct {
@@ -42,22 +43,22 @@ func GetAssets() *Assets {
 
 	if needToInitAssets {
 		globalAssets = &Assets{
-			SpaceshipTexture:      assets.LoadTexture("./res/spaceship.png"),
-			BulletTexture:         assets.LoadTexture("./res/bullet.png"),
-			BigAsteroidTexture:    assets.LoadTexture("./res/big-asteroid.png"),
-			NormalAsteroidTexture: assets.LoadTexture("./res/normal-asteroid.png"),
-			SmallAsteroidTexture:  assets.LoadTexture("./res/small-asteroid.png"),
-			SmallExplosionTexture: assets.LoadTexture("./res/small-explosion.png"),
-			BigExplosionTexture:   assets.LoadTexture("./res/big-explosion.png"),
-			EnergyBlastTexture:    assets.LoadTexture("./res/energy-blast.png"),
-			ShieldTexture:         assets.LoadTexture("./res/simple-energy-shield.png"),
+			SpaceshipTexture:      assets.LoadTexture(res.Spaceship),
+			BulletTexture:         assets.LoadTexture(res.Bullet),
+			BigAsteroidTexture:    assets.LoadTexture(res.BigAsteroid),
+			NormalAsteroidTexture: assets.LoadTexture(res.NormalAsteroid),
+			SmallAsteroidTexture:  assets.LoadTexture(res.SmallAsteroid),
+			SmallExplosionTexture: assets.LoadTexture(res.SmallExplosion),
+			BigExplosionTexture:   assets.LoadTexture(res.BigExplosion),
+			EnergyBlastTexture:    assets.LoadTexture(res.EnergyBlast),
+			ShieldTexture:         assets.LoadTexture(res.SimpleEnergyShield),
 
-			BarTexture:        assets.LoadTexture("./res/bar.png"),
-			ProgressTexture:   assets.LoadTexture("./res/progress.png"),
-			NextDialogTexture: assets.LoadTexture("./res/next-dialog.png"),
+			BarTexture:        assets.LoadTexture(res.Bar),
+			ProgressTexture:   assets.LoadTexture(res.Progress),
+			NextDialogTexture: assets.LoadTexture(res.NextDialog),
 
 			TextDialogSlice9: render.Slice9Factory{
-				Texture: assets.LoadTexture("./res/text-dialog.png"),
+				Texture: assets.LoadTexture(res.TextDialog),
 				Top:     4,
 				Right:   8,
 				Bottom:  8,
@@ -65,15 +66,21 @@ func GetAssets() *Assets {
 			}.Create(),
 
 			UIFontFace: assets.FontFaceFactory{
-				Size:         16,
-				DPI:          72,
-				FontFileName: "./res/dogicapixel.ttf",
+				Size: 16,
+				DPI:  72,
+				FontData: assets.FontData{
+					Bytes: res.UIFont,
+					Name:  "uifont",
+				},
 			}.Create(),
 
 			TitleFontFace: assets.FontFaceFactory{
-				Size:         60,
-				DPI:          72,
-				FontFileName: "./res/DayPosterShadowNF.ttf",
+				Size: 60,
+				DPI:  72,
+				FontData: assets.FontData{
+					Bytes: res.TitleFont,
+					Name:  "titlefont",
+				},
 			}.Create(),
 		}
 
