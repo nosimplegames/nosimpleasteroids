@@ -15,6 +15,8 @@ type Entity struct {
 
 	Children []IEntity
 	Parent   IEntity
+
+	Size math.Vector
 }
 
 func (entity Entity) GetId() string {
@@ -54,7 +56,8 @@ func (entity Entity) GetParent() IEntity {
 
 func (entity Entity) GetPosition() math.Vector {
 	fullTransform := entity.GetAncestorsTransform()
-	transformedX, transformedY := fullTransform.Apply(entity.Position.X, entity.Position.Y)
+	entityPosition := entity.Transformable.GetPosition()
+	transformedX, transformedY := fullTransform.Apply(entityPosition.X, entityPosition.Y)
 
 	return math.Vector{
 		X: transformedX,
@@ -74,4 +77,8 @@ func (entity Entity) GetAncestorsTransform() math.Transform {
 	}
 
 	return transform
+}
+
+func (entity Entity) GetSize() math.Vector {
+	return entity.Size
 }

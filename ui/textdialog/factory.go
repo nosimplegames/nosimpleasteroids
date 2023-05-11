@@ -1,6 +1,8 @@
 package textdialog
 
 import (
+	"image/color"
+
 	"golang.org/x/image/font"
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/events"
@@ -8,18 +10,18 @@ import (
 	"simple-games.com/asteroids/render"
 	"simple-games.com/asteroids/ui"
 	"simple-games.com/asteroids/utils"
-	"simple-games.com/asteroids/utils/utilstext"
 )
 
 type Factory struct {
 	Slice9            render.Slice9
 	TextLinesCount    int
-	LineWidth         float64
+	Size              math.Vector
 	Padding           ui.Padding
 	FontFace          font.Face
 	LineHeight        float64
 	Text              string
 	NextDialogTexture render.Texture
+	Color             color.Color
 }
 
 func (factory Factory) Create() *TextDialog {
@@ -27,11 +29,11 @@ func (factory Factory) Create() *TextDialog {
 
 	dialog.FontFace = factory.FontFace
 	dialog.TextOffset = factory.GetTextPosition()
-	targetSize := factory.GetTargetSize()
-	dialog.BackgroundTexture = factory.Slice9.Compose(targetSize)
-	dialog.Origin = targetSize.By(0.5)
+	dialog.BackgroundTexture = factory.Slice9.Compose(factory.Size)
+	dialog.SetOrigin(factory.Size.By(0.5))
 	dialog.Dialogs = factory.GetDialogs()
 	dialog.LineHeight = factory.LineHeight
+	dialog.SetColor(factory.Color)
 
 	nextDialogEntity := factory.CreateNextDialogEntity()
 	dialog.AddChild(nextDialogEntity)
@@ -39,15 +41,6 @@ func (factory Factory) Create() *TextDialog {
 	factory.ConnectEvents(dialog, nextDialogEntity)
 
 	return dialog
-}
-
-func (factory Factory) GetTargetSize() math.Vector {
-	lineHeight := utilstext.GetFontFaceHeight(factory.FontFace) * factory.LineHeight
-
-	return math.Vector{
-		X: factory.LineWidth + factory.Padding.Right + factory.Padding.Left,
-		Y: float64(lineHeight)*float64(factory.TextLinesCount) + factory.Padding.Top + factory.Padding.Bottom,
-	}
 }
 
 func (factory Factory) GetTextPosition() math.Vector {
@@ -62,26 +55,26 @@ func (factory Factory) CreateNextDialogEntity() engine.IEntity {
 		Texture: factory.NextDialogTexture,
 	}
 	nextDialog.SetOriginCenter()
-	nextDialog.Position = factory.GetNextDialogPosition()
+	nextDialog.SetPosition(factory.GetNextDialogPosition())
 
 	return nextDialog
 }
 
 func (factory Factory) GetNextDialogPosition() math.Vector {
-	size := factory.GetTargetSize()
-
-	return size.ByVector(math.Vector{
+	return factory.Size.ByVector(math.Vector{
 		X: 0.93,
 		Y: 0.75,
 	})
 }
 
 func (factory Factory) GetDialogs() utils.List[Dialog] {
+	lineWidth := factory.Size.X - factory.Padding.Left - factory.Padding.Right
+
 	return utils.List[Dialog]{
 		Elements: DialogsFactory{
 			TextLinesCount: factory.TextLinesCount,
 			FontFace:       factory.FontFace,
-			LineWidth:      factory.LineWidth,
+			LineWidth:      lineWidth,
 			Text:           factory.Text,
 			LineHeight:     factory.LineHeight,
 		}.Create(),

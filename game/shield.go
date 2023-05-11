@@ -2,17 +2,10 @@ package game
 
 import (
 	"simple-games.com/asteroids/engine"
-	"simple-games.com/asteroids/math"
 )
 
 type Shield struct {
 	engine.Sprite
-
-	Size math.Vector
-}
-
-func (shield Shield) GetSize() math.Vector {
-	return shield.Size
 }
 
 func (shield Shield) GetCollisionMask() string {

@@ -1,6 +1,9 @@
 package game
 
-import "simple-games.com/asteroids/math"
+import (
+	"simple-games.com/asteroids/math"
+	"simple-games.com/asteroids/render"
+)
 
 type SpaceshipFactory struct {
 }
@@ -10,41 +13,40 @@ func (factory SpaceshipFactory) Create() *Spaceship {
 	spaceship.Type = SpaceshipEntityType
 
 	spaceship.Texture = GetAssets().SpaceshipTexture
+	spaceship.Size = math.Vector{
+		X: 39,
+		Y: 39,
+	}
 
 	spaceship.Propulsor = Engine{
-		MinSpeed:      0.3,
+		MinSpeed:      3,
 		Acceleration:  0.05,
-		MaxSpeed:      4,
-		Deaceleration: 0.025,
+		MaxSpeed:      6,
+		Deaceleration: 0.01,
 	}
 	spaceship.RightRotator = Engine{
 		MinSpeed:      0.0,
-		Acceleration:  0.003,
-		MaxSpeed:      0.05,
-		Deaceleration: 0.002,
+		Acceleration:  0.02,
+		MaxSpeed:      0.08,
+		Deaceleration: 0.005,
 	}
 	spaceship.LeftRotator = Engine{
 		MinSpeed:      0.0,
-		Acceleration:  0.003,
-		MaxSpeed:      0.05,
-		Deaceleration: 0.002,
+		Acceleration:  0.02,
+		MaxSpeed:      0.08,
+		Deaceleration: 0.005,
 	}
 	spaceship.Turret = &Turret{
 		Weapon: Weapon{
 			TimeBetweenShoots: 0.1,
 		},
 	}
-	spaceship.LifePoints = 3
 
-	spaceship.Position = math.Vector{
-		X: 400,
-		Y: 400,
-	}
-	spaceship.Origin = math.Vector{
-		X: 8,
-		Y: 8,
-	}
-	spaceship.Rotation = math.DegreesToRads(-90)
+	spaceship.SetMaxLifePoints(100)
+	spaceship.SetLifePoints(100)
+
+	spaceship.SetOrigin(render.GetTextureSize(spaceship.Texture).By(0.5))
+	spaceship.SetRotation(math.DegreesToRads(-90))
 
 	return spaceship
 }

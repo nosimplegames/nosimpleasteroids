@@ -12,18 +12,18 @@ func (handler AsteroidExplodeHandler) Handle() {
 }
 
 func (handler AsteroidExplodeHandler) CreateSmallerAsteroids() {
-	mayCreateSmallerAsteroids := handler.ExplodingAsteroid.Size != SmallAsteroid
+	mayCreateSmallerAsteroids := handler.ExplodingAsteroid.Dimensions != SmallAsteroid
 
 	if !mayCreateSmallerAsteroids {
 		return
 	}
 
-	rotation := handler.ExplodingAsteroid.Rotation + 0.785398
+	rotation := handler.ExplodingAsteroid.GetRotation() + 0.785398
 
 	for i := 0; i < 2; i++ {
 		asteroid := AsteroidFactory{
 			Rotation: rotation + float64(180*i),
-			Position: handler.ExplodingAsteroid.Position,
+			Position: handler.ExplodingAsteroid.GetPosition(),
 			Size:     handler.ExplodingAsteroid.GetSmallerSize(),
 		}.Create()
 
@@ -32,14 +32,14 @@ func (handler AsteroidExplodeHandler) CreateSmallerAsteroids() {
 }
 
 func (handler AsteroidExplodeHandler) CreateExplosion() {
-	mayCreateExplosion := handler.ExplodingAsteroid.Size == SmallAsteroid
+	mayCreateExplosion := handler.ExplodingAsteroid.Dimensions == SmallAsteroid
 
 	if !mayCreateExplosion {
 		return
 	}
 
 	ExplosionFactory{
-		Position:      handler.ExplodingAsteroid.Position,
+		Position:      handler.ExplodingAsteroid.GetPosition(),
 		ExplosionSize: BigExplosion,
 	}.Create()
 }

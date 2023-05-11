@@ -11,8 +11,8 @@ type ShieldFactory struct {
 
 func (factory ShieldFactory) Create() *Shield {
 	shield := &Shield{}
-	shield.Origin = math.Vector{X: 16, Y: 16}
-	shield.Position = math.Vector{X: 8, Y: 8}
+	shield.SetOrigin(math.Vector{X: 16, Y: 16})
+	shield.SetPosition(math.Vector{X: 8, Y: 8})
 	shield.Size = math.Vector{X: 32, Y: 32}
 
 	animation := factory.GetAnimation(shield)

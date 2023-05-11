@@ -39,10 +39,10 @@ func (act GameTitle) GetTitle() *engine.MultilineText {
 		LineHeight: 1.5,
 		FontFace:   game.GetAssets().TitleFontFace,
 	}
-	text.Position = math.Vector{
+	text.SetPosition(math.Vector{
 		X: 400,
 		Y: 400,
-	}
+	})
 
 	return text
 }

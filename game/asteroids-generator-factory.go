@@ -1,6 +1,7 @@
 package game
 
 import (
+	"simple-games.com/asteroids/assets"
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/math"
 )
@@ -14,35 +15,36 @@ func (factory AsteroidsGeneratorFactory) Create() *AsteroidsGenerator {
 	generator := &AsteroidsGenerator{}
 	generator.TimeBetweenShoots = 2
 
+	offset := 20.0
 	generator.GenerationPoints = []AsteroidGenerationPoint{
 		{
 			Position: math.Vector{
-				X: 400,
-				Y: -40,
+				X: assets.GameSize.X * 0.5,
+				Y: -offset,
 			},
 			MinRotation: math.DegreesToRads(45),
 			MaxRotation: math.DegreesToRads(135),
 		},
 		{
 			Position: math.Vector{
-				X: 840,
-				Y: 400,
+				X: assets.GameSize.X + offset,
+				Y: assets.GameSize.Y * 0.5,
 			},
 			MinRotation: math.DegreesToRads(135),
 			MaxRotation: math.DegreesToRads(225),
 		},
 		{
 			Position: math.Vector{
-				X: 400,
-				Y: 840,
+				X: assets.GameSize.X * 0.5,
+				Y: assets.GameSize.Y + offset,
 			},
 			MinRotation: math.DegreesToRads(225),
 			MaxRotation: math.DegreesToRads(315),
 		},
 		{
 			Position: math.Vector{
-				X: -40,
-				Y: 400,
+				X: -offset,
+				Y: assets.GameSize.Y * 0.5,
 			},
 			MinRotation: math.DegreesToRads(315),
 			MaxRotation: math.DegreesToRads(395),

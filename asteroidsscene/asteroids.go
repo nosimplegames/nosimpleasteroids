@@ -1,6 +1,7 @@
 package asteroidsscene
 
 import (
+	"simple-games.com/asteroids/assets"
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/events"
 	"simple-games.com/asteroids/game"
@@ -20,32 +21,25 @@ func (act *Asteroids) Openning(_ *scenes.Scene) {
 	act.Player.IsControllerEnabled = true
 	act.CreateTeleports()
 
-	generator := game.GetAsteroidsGenerator()
-	generator.OnDie.AddCallback(act.Die)
+	// generator := game.GetAsteroidsGenerator()
+	// generator.OnDie.AddCallback(act.Die)
 
-	act.Player.OnDie.AddCallback(generator.DieAfterAsteroids)
+	// act.Player.OnDie.AddCallback(generator.DieAfterAsteroids)
 }
 
 func (act *Asteroids) CreateTeleports() {
-	targetPosition := math.Vector{
-		X: 400,
-		Y: 400,
-	}
-
-	levelSize := math.Vector{
-		X: 800,
-		Y: 800,
-	}
+	levelSize := assets.GameSize
+	targetPosition := levelSize.By(0.5)
 
 	horizontalTeleportSize := math.Vector{
-		X: 800,
+		X: levelSize.X,
 		Y: 20,
 	}
 	verticalTeleportSize := math.Vector{
 		X: 20,
-		Y: 800,
+		Y: levelSize.Y,
 	}
-	teleportOffset := 10.0
+	teleportOffset := 20.0
 	teleportCount := 4
 
 	teleportSizes := []math.Vector{

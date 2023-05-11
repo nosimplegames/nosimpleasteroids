@@ -21,7 +21,7 @@ type ExplosionFactory struct {
 func (factory ExplosionFactory) Create() {
 	explosion := &engine.Sprite{}
 
-	explosion.Position = factory.Position
+	explosion.SetPosition(factory.Position)
 	animator := factory.GetAnimator(explosion)
 	animator.Animation.OnStop.AddCallback(explosion.Die)
 

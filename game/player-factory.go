@@ -3,7 +3,7 @@ package game
 import (
 	"simple-games.com/asteroids/animations"
 	"simple-games.com/asteroids/engine"
-	"simple-games.com/asteroids/events"
+	"simple-games.com/asteroids/math"
 )
 
 type PlayerFactory struct {
@@ -16,16 +16,17 @@ func (factory PlayerFactory) Create() *Player {
 	player.Spaceship = *SpaceshipFactory{}.Create()
 	player.IsControllerEnabled = !factory.IsControllerDisabled
 	player.Id = "player"
+	player.Direction = math.DegreesToRads(-90)
 
-	player.HealthBar = PlayerHealthBarFactory{}.Create()
+	// player.HealthBar = PlayerHealthBarFactory{}.Create()
 	// player.AddChild(player.HealthBar)
 
-	player.AddEventListener(events.EventListener{
-		EventType: LifePointsChanged,
-		Callback: func(_ events.Event) {
-			player.HealthBar.Value = float64(player.LifePoints)
-		},
-	})
+	// player.AddEventListener(events.EventListener{
+	// 	EventType: LifePointsChanged,
+	// 	Callback: func(_ events.Event) {
+	// 		player.HealthBar.Value = float64(player.LifePoints)
+	// 	},
+	// })
 
 	// Theres a problem here, once animation is done, it'll be removed from
 	// engine animations but player will still has a pointer to it,

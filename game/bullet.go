@@ -31,7 +31,7 @@ func (bullet Bullet) GetCollisionMask() string {
 }
 
 func (bullet Bullet) GetSize() math.Vector {
-	return math.Vector{X: 10, Y: 5}
+	return math.Vector{X: 9, Y: 10}
 }
 
 func (bullet *Bullet) OnCollision(collisionMask string) {
@@ -39,7 +39,7 @@ func (bullet *Bullet) OnCollision(collisionMask string) {
 	GetScore().Increase(100)
 
 	ExplosionFactory{
-		Position:      bullet.Position,
+		Position:      bullet.GetPosition(),
 		ExplosionSize: SmallExplosion,
 	}.Create()
 }

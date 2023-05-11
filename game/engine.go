@@ -24,3 +24,7 @@ func (engine *Engine) Deacelerate() {
 	engine.CurrentSpeed -= engine.Deaceleration
 	engine.CurrentSpeed = math.Max(engine.CurrentSpeed, engine.MinSpeed)
 }
+
+func (engine *Engine) Reset() {
+	engine.CurrentSpeed = engine.MinSpeed
+}

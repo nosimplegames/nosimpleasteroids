@@ -19,7 +19,7 @@ func (text MultilineText) Draw(target render.RenderTarget, transform math.Transf
 	render.MultilineText{
 		Lines:      text.Lines,
 		Target:     target,
-		Position:   text.Position,
+		Position:   text.GetPosition(),
 		ColorM:     text.ColorM,
 		LineHeight: text.LineHeight,
 		FontFace:   text.FontFace,

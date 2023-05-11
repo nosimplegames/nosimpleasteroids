@@ -59,14 +59,14 @@ func GetAssets() *Assets {
 
 			TextDialogSlice9: render.Slice9Factory{
 				Texture: assets.LoadTexture(res.TextDialog),
-				Top:     4,
-				Right:   8,
-				Bottom:  8,
-				Left:    4,
+				Top:     9,
+				Right:   18,
+				Bottom:  18,
+				Left:    9,
 			}.Create(),
 
 			UIFontFace: assets.FontFaceFactory{
-				Size: 16,
+				Size: 24,
 				DPI:  72,
 				FontData: assets.FontData{
 					Bytes: res.UIFont,
@@ -75,7 +75,7 @@ func GetAssets() *Assets {
 			}.Create(),
 
 			TitleFontFace: assets.FontFaceFactory{
-				Size: 60,
+				Size: 180,
 				DPI:  72,
 				FontData: assets.FontData{
 					Bytes: res.TitleFont,

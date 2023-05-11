@@ -1,16 +1,7 @@
 package game
 
-import (
-	"simple-games.com/asteroids/math"
-)
-
 type EnergyBlast struct {
 	Inert
-	Size math.Vector
-}
-
-func (blast EnergyBlast) GetSize() math.Vector {
-	return blast.Size
 }
 
 func (blast EnergyBlast) GetCollisionMask() string {

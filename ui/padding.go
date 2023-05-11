@@ -6,3 +6,12 @@ type Padding struct {
 	Bottom float64
 	Left   float64
 }
+
+func SamePadding(padding float64) Padding {
+	return Padding{
+		Top:    padding,
+		Right:  padding,
+		Bottom: padding,
+		Left:   padding,
+	}
+}

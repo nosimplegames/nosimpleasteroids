@@ -7,3 +7,15 @@ func ForEachBackwards[T interface{}](array []T, callback GenericCallback[T]) {
 		callback(array[i])
 	}
 }
+
+type ReduceCallback[T any, K any] func(K, T) K
+
+func Reduce[T any, K any](array []T, callback ReduceCallback[T, K], initialValue K) K {
+	accumulator := initialValue
+
+	for _, element := range array {
+		accumulator = callback(accumulator, element)
+	}
+
+	return accumulator
+}

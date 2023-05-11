@@ -1,7 +1,7 @@
 package game
 
 import (
-	"simple-games.com/asteroids/math"
+	"simple-games.com/asteroids/assets"
 	"simple-games.com/asteroids/ui/progressbar"
 )
 
@@ -9,17 +9,17 @@ type PlayerHealthBarFactory struct {
 }
 
 func (factory PlayerHealthBarFactory) Create() *PlayerHealthBar {
-	assets := GetAssets()
+	gameAssets := GetAssets()
 	healthBar := &PlayerHealthBar{
 		ProgressBar: *progressbar.Factory{
-			ProgressTexture: assets.ProgressTexture,
-			BarTexture:      assets.BarTexture,
+			ProgressTexture: gameAssets.ProgressTexture,
+			BarTexture:      gameAssets.BarTexture,
 		}.Create(),
 	}
+	healthBar.ProgressOffset = assets.HealthBarOffset
 
-	healthBar.Position = math.Vector{X: 20, Y: 10}
-	healthBar.MaxValue = 3
-	healthBar.Value = 3
+	healthBar.MaxValue = 100
+	healthBar.Value = 100
 
 	return healthBar
 }

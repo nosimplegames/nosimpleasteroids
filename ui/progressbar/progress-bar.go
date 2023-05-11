@@ -10,7 +10,6 @@ import (
 
 type ProgressBar struct {
 	engine.Entity
-	math.Transformable
 
 	BarTexture      render.Texture
 	ProgressTexture render.Texture
@@ -27,10 +26,13 @@ func (bar ProgressBar) Draw(target render.RenderTarget, transform math.Transform
 		Transform: transform,
 	}.Render()
 
+	progressTransfrom := bar.GetProgressTransform()
+	progressTransfrom.Concat(transform)
+
 	render.Sprite{
 		Texture:   bar.GetProgressTexture(),
 		Target:    target,
-		Transform: bar.GetProgressTransform(),
+		Transform: progressTransfrom,
 	}.Render()
 }
 
@@ -47,8 +49,16 @@ func (bar ProgressBar) GetProgressTexture() render.Texture {
 }
 
 func (bar ProgressBar) GetProgressTransform() math.Transform {
-	transform := bar.GetTransform()
+	transform := math.Transform{}
 	transform.Translate(bar.ProgressOffset.X, bar.ProgressOffset.Y)
 
 	return transform
+}
+
+func (bar *ProgressBar) SetValue(value float64) {
+	bar.Value = value
+}
+
+func (bar *ProgressBar) SetMaxValue(value float64) {
+	bar.Value = value
 }

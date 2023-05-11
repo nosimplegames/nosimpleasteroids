@@ -14,7 +14,7 @@ type Inert struct {
 func (inert *Inert) Update() {
 	movementVector := math.MovementVector{
 		Speed:    inert.Speed,
-		Rotation: inert.Rotation,
+		Rotation: inert.GetRotation(),
 	}.Calculate()
 
 	inert.Move(movementVector)

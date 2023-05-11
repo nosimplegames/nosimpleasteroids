@@ -41,14 +41,14 @@ func (repeater TextureRepeater) GetTransform(column, row int, startingPosition e
 	transformable := emath.Transformable{}
 	textureSize := GetTextureSize(repeater.Texture)
 
-	transformable.Position = startingPosition.Add(
+	transformable.SetPosition(startingPosition.Add(
 		textureSize.ByVector(
 			emath.Vector{
 				X: float64(column),
 				Y: float64(row),
 			},
 		),
-	)
+	))
 
 	return transformable.GetTransform()
 }

@@ -13,12 +13,12 @@ type BulletFactory struct {
 func (factory BulletFactory) Create() *Bullet {
 	bullet := &Bullet{}
 
-	bullet.Position = factory.Position
-	bullet.Origin = math.Vector{X: 5, Y: 2.5}
-	bullet.Rotation = factory.Rotation
-	bullet.LifeTime = 0.4
-	bullet.Speed = 15
+	bullet.SetPosition(factory.Position)
+	bullet.SetRotation(factory.Rotation)
+	bullet.LifeTime = 1.5
+	bullet.Speed = 40
 	bullet.Texture = GetAssets().BulletTexture
+	bullet.SetOriginCenter()
 
 	engine.GetWorld().AddCollisinable(bullet)
 

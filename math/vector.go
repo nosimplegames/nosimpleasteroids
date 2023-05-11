@@ -19,6 +19,13 @@ func (vector Vector) ByVector(another Vector) Vector {
 	}
 }
 
+func (vector Vector) DivideV(another Vector) Vector {
+	return Vector{
+		X: vector.X / another.X,
+		Y: vector.Y / another.Y,
+	}
+}
+
 func (vector Vector) Minus(another Vector) Vector {
 	return Vector{
 		X: vector.X - another.X,

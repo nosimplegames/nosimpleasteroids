@@ -8,9 +8,10 @@ import (
 
 type Player struct {
 	Spaceship
-
-	HealthBar           *PlayerHealthBar
 	IsControllerEnabled bool
+	DidAccelerate       bool
+	DidRotate           bool
+	Direction           float64
 }
 
 func (player *Player) HandleInput() {
@@ -20,8 +21,10 @@ func (player *Player) HandleInput() {
 
 	if ebiten.IsKeyPressed(ebiten.KeyW) {
 		player.Propulsor.Accelerate()
+		player.DidAccelerate = true
 	} else {
 		player.Propulsor.Deacelerate()
+		player.DidAccelerate = false
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyA) {
@@ -37,7 +40,7 @@ func (player *Player) HandleInput() {
 	}
 
 	if ebiten.IsKeyPressed(ebiten.KeyJ) {
-		player.Turret.Shoot(player.Position, player.Rotation)
+		player.Turret.Shoot(player.GetPosition(), player.GetRotation())
 	}
 
 	if inpututil.IsKeyJustReleased(ebiten.KeySpace) {
@@ -55,8 +58,12 @@ func (player *Player) Update() {
 	player.Rotate(-player.LeftRotator.CurrentSpeed)
 	player.Rotate(player.RightRotator.CurrentSpeed)
 
+	if player.DidAccelerate {
+		player.Direction = player.GetRotation()
+	}
+
 	movementVector := math.MovementVector{
-		Rotation: player.Rotation,
+		Rotation: player.Direction,
 		Speed:    player.Propulsor.CurrentSpeed,
 	}.Calculate()
 	player.Move(movementVector)

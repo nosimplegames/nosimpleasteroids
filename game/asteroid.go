@@ -5,10 +5,10 @@ import (
 	"simple-games.com/asteroids/particles"
 )
 
-type AsteroidSize int
+type AsteroidDimensions int
 
 const (
-	BigAsteroid AsteroidSize = iota
+	BigAsteroid AsteroidDimensions = iota
 	NormalAsteroid
 	SmallAsteroid
 )
@@ -21,15 +21,14 @@ type Asteroid struct {
 	Inert
 	particles.Particle
 
-	Size         AsteroidSize
-	SizeInPixels math.Vector
-	LifePoints   int
+	Dimensions AsteroidDimensions
+	LifePoints int
 
 	OnExplode OnExplodeFn
 }
 
-func (asteroid Asteroid) GetSmallerSize() AsteroidSize {
-	if asteroid.Size == NormalAsteroid {
+func (asteroid Asteroid) GetSmallerSize() AsteroidDimensions {
+	if asteroid.Dimensions == NormalAsteroid {
 		return SmallAsteroid
 	}
 
@@ -41,34 +40,34 @@ func (asteroid *Asteroid) Update() {
 	asteroid.Inert.Update()
 }
 
-func (asteroid *Asteroid) SetSize(size AsteroidSize) {
-	asteroid.Size = size
+func (asteroid *Asteroid) SetSize(size AsteroidDimensions) {
+	asteroid.Dimensions = size
 	assets := GetAssets()
 
 	switch size {
 	case BigAsteroid:
 		asteroid.Texture = assets.BigAsteroidTexture
 		asteroid.Speed = 1.5
-		asteroid.LifeTime = 10
-		asteroid.LifePoints = 3
-		asteroid.SizeInPixels = math.Vector{X: 48, Y: 48}
+		asteroid.LifeTime = 30
+		asteroid.LifePoints = 9
+		asteroid.Size = math.Vector{X: 72, Y: 72}
 
 	case NormalAsteroid:
 		asteroid.Texture = assets.NormalAsteroidTexture
 		asteroid.Speed = 1.75
-		asteroid.LifeTime = 8
-		asteroid.LifePoints = 2
-		asteroid.SizeInPixels = math.Vector{X: 33, Y: 33}
+		asteroid.LifeTime = 24
+		asteroid.LifePoints = 6
+		asteroid.Size = math.Vector{X: 51, Y: 51}
 
 	case SmallAsteroid:
 		asteroid.Texture = assets.SmallAsteroidTexture
 		asteroid.Speed = 3
-		asteroid.LifeTime = 5
-		asteroid.LifePoints = 1
-		asteroid.SizeInPixels = math.Vector{X: 20, Y: 20}
+		asteroid.LifeTime = 15
+		asteroid.LifePoints = 3
+		asteroid.Size = math.Vector{X: 36, Y: 36}
 	}
 
-	asteroid.Origin = asteroid.SizeInPixels.By(0.5)
+	asteroid.SetOriginCenter()
 }
 
 func (asteroid Asteroid) CanCollide() bool {
@@ -82,10 +81,6 @@ func (asteroid Asteroid) CanCollideWith(collisionMask string) bool {
 
 func (asteroid *Asteroid) GetCollisionMask() string {
 	return AsteroidCollisionMask
-}
-
-func (asteroid *Asteroid) GetSize() math.Vector {
-	return asteroid.SizeInPixels
 }
 
 func (asteroid *Asteroid) OnCollision(collisionMask string) {

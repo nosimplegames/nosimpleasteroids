@@ -7,6 +7,7 @@ import (
 type IEntity interface {
 	ILiving
 	IDrawable
+	math.ITransformable
 
 	HandleInput()
 	Update()
@@ -14,8 +15,8 @@ type IEntity interface {
 	GetChildren() []IEntity
 	RemoveDeadChildren()
 
-	GetTransform() math.Transform
 	GetAncestorsTransform() math.Transform
+	GetSize() math.Vector
 
 	SetParent(IEntity)
 	GetParent() IEntity

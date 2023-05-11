@@ -25,7 +25,9 @@ func (filler TextureFiller) Render() {
 				Y: textureY,
 			}
 
-			transform := math.Transformable{Position: position}.GetTransform()
+			transformable := math.Transformable{}
+			transformable.SetPosition(position)
+			transform := transformable.GetTransform()
 
 			Sprite{
 				Target:    filler.Target,

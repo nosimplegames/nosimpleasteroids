@@ -3,14 +3,13 @@ package game
 import (
 	"simple-games.com/asteroids/engine"
 	"simple-games.com/asteroids/events"
-	"simple-games.com/asteroids/math"
 )
 
 const SpaceshipEntityType = "spaceship"
 
 type Spaceship struct {
-	events.EventTarget
 	engine.Sprite
+	HasLifePoints
 
 	Propulsor    Engine
 	RightRotator Engine
@@ -19,19 +18,12 @@ type Spaceship struct {
 	Turret          IWeapon
 	ShieldGenerator ShieldGenerator
 
-	LifePoints   int
-	IsRespawning bool
+	OnLifePointsChanged events.SignalTCallback
+	IsRespawning        bool
 }
 
 func (spaceship Spaceship) IsAlive() bool {
-	return spaceship.LifePoints > 0 && !spaceship.IsDead
-}
-
-func (spaceship Spaceship) GetSize() math.Vector {
-	return math.Vector{
-		X: 12,
-		Y: 12,
-	}
+	return spaceship.lifePoints > 0 && !spaceship.IsDead
 }
 
 func (spaceship Spaceship) CanCollide() bool {
@@ -53,13 +45,9 @@ func (spaceship *Spaceship) OnCollision(collisionMask string) {
 		return
 	}
 
-	spaceship.LifePoints -= 1
-	spaceship.DispatchEvent(events.Event{
-		Type: LifePointsChanged,
-		Data: spaceship.LifePoints,
-	})
+	spaceship.DecreaseLifePoints(33)
 
-	gotDestroyed := spaceship.LifePoints == 0
+	gotDestroyed := spaceship.lifePoints == 0
 
 	if gotDestroyed {
 		spaceship.Die()

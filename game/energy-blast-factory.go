@@ -12,9 +12,9 @@ type EnergyBlastFactory struct {
 func (factory EnergyBlastFactory) Create() *EnergyBlast {
 	blast := &EnergyBlast{}
 	blast.Texture = factory.GetTexture()
-	blast.Origin = math.Vector{X: 16, Y: 400}
-	blast.Position = math.Vector{X: 400, Y: 16}
-	blast.Rotation = math.DegreesToRads(90)
+	blast.SetOrigin(math.Vector{X: 16, Y: 400})
+	blast.SetPosition(math.Vector{X: 400, Y: 16})
+	blast.SetRotation(math.DegreesToRads(90))
 	blast.Speed = 10
 	// Size depends on rotation as we're using AABB
 	blast.Size = math.Vector{X: 800, Y: 32}

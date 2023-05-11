@@ -47,8 +47,8 @@ func (generator AsteroidsGenerator) GetRandomGenerationPoint() AsteroidGeneratio
 	return generator.GenerationPoints[randomIndex]
 }
 
-func (generator AsteroidsGenerator) GetRandomAsteroidSize() AsteroidSize {
-	asteroidSizes := []AsteroidSize{
+func (generator AsteroidsGenerator) GetRandomAsteroidSize() AsteroidDimensions {
+	asteroidSizes := []AsteroidDimensions{
 		BigAsteroid,
 		NormalAsteroid,
 		SmallAsteroid,
@@ -84,10 +84,10 @@ func (generator *AsteroidsGenerator) Update() {
 
 func (generator AsteroidsGenerator) GetRequiredAsteroidsToReduceTime() int {
 	if generator.TimeBetweenShoots > 1 {
-		return 5
+		return 3
 	}
 
-	return 10
+	return 5
 }
 
 func (generator *AsteroidsGenerator) DieAfterAsteroids() {

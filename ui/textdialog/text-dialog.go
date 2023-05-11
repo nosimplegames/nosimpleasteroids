@@ -14,8 +14,8 @@ import (
 
 type TextDialog struct {
 	engine.Entity
-	math.Transformable
 	events.EventTarget
+	engine.Colorable
 
 	BackgroundTexture render.Texture
 	FontFace          font.Face
@@ -51,7 +51,8 @@ func (dialog TextDialog) Draw(target render.RenderTarget, transform math.Transfo
 		FontFace:   dialog.FontFace,
 		LineHeight: dialog.LineHeight,
 		Target:     target,
-		Position:   dialog.Position.Add(dialog.TextOffset),
+		Position:   dialog.GetPosition().Add(dialog.TextOffset),
+		ColorM:     dialog.ColorM,
 	}.Render()
 }
 

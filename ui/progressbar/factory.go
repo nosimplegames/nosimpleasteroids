@@ -18,7 +18,8 @@ func (factory Factory) Create() *ProgressBar {
 	barTextureSize := render.GetTextureSize(factory.BarTexture)
 	progressTextureSize := render.GetTextureSize(factory.ProgressTexture)
 
-	progressBar.Origin = barTextureSize.By(0.5)
+	progressBar.Size = barTextureSize
+	progressBar.SetOrigin(barTextureSize.By(0.5))
 	progressBar.ProgressOffset = barTextureSize.Minus(progressTextureSize).By(0.5)
 
 	return progressBar
